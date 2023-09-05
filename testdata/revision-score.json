@@ -1,0 +1,162 @@
+[
+  {
+    "id": [
+      {
+        "topic": "eqiad.mediawiki.revision-score",
+        "partition": 0,
+        "timestamp": 1606939261281
+      },
+      {
+        "topic": "codfw.mediawiki.revision-score",
+        "partition": 0,
+        "offset": -1
+      }
+    ],
+    "data": {
+      "$schema": "/mediawiki/revision/score/2.0.0",
+      "meta": {
+        "stream": "mediawiki.revision-score",
+        "uri": "https://www.wikidata.org/wiki/Q66533108",
+        "request_id": "X8fydwpAIDYAALW1vJgAAADC",
+        "id": "19f27600-34d9-11eb-aa0d-f3e3a318b7a2",
+        "dt": "2020-12-02T20:01:01.280Z",
+        "domain": "www.wikidata.org",
+        "topic": "eqiad.mediawiki.revision-score",
+        "partition": 0,
+        "offset": 965089498
+      },
+      "database": "wikidatawiki",
+      "page_id": 66132507,
+      "page_title": "Q66533108",
+      "page_namespace": 0,
+      "page_is_redirect": false,
+      "performer": {
+        "user_text": "Adithyak1997",
+        "user_groups": [
+          "rollbacker",
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "user_is_bot": false,
+        "user_id": 2655754,
+        "user_registration_dt": "2016-02-03T13:19:33Z",
+        "user_edit_count": 49109
+      },
+      "rev_id": 1316923273,
+      "rev_parent_id": 1044736099,
+      "rev_timestamp": "2020-12-02T20:00:55Z",
+      "scores": {
+        "damaging": {
+          "model_name": "damaging",
+          "model_version": "0.5.0",
+          "prediction": [
+            "false"
+          ],
+          "probability": {
+            "false": 0.9495487093774955,
+            "true": 0.050451290622504474
+          }
+        },
+        "goodfaith": {
+          "model_name": "goodfaith",
+          "model_version": "0.5.0",
+          "prediction": [
+            "true"
+          ],
+          "probability": {
+            "false": 4.631382666264727e-8,
+            "true": 0.9999999536861733
+          }
+        },
+        "itemquality": {
+          "model_name": "itemquality",
+          "model_version": "0.5.0",
+          "prediction": [
+            "C"
+          ],
+          "probability": {
+            "A": 0.006817294355459869,
+            "B": 0.20755055588159022,
+            "C": 0.3969687758255923,
+            "D": 0.37425002300166227,
+            "E": 0.014413350935695356
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": [
+      {
+        "topic": "eqiad.mediawiki.revision-score",
+        "partition": 0,
+        "timestamp": 1606939261612
+      },
+      {
+        "topic": "codfw.mediawiki.revision-score",
+        "partition": 0,
+        "offset": -1
+      }
+    ],
+    "data": {
+      "$schema": "/mediawiki/revision/score/2.0.0",
+      "meta": {
+        "stream": "mediawiki.revision-score",
+        "uri": "https://fr.wikipedia.org/wiki/Utilisateur:Denvis1/NCAA-Squelette_%C3%A9quipe",
+        "request_id": "8e98a67f-60fd-4e3f-9913-84f5ddf8044e",
+        "id": "1a24f7b0-34d9-11eb-aa0d-f3e3a318b7a2",
+        "dt": "2020-12-02T20:01:01.611Z",
+        "domain": "fr.wikipedia.org",
+        "topic": "eqiad.mediawiki.revision-score",
+        "partition": 0,
+        "offset": 965089504
+      },
+      "database": "frwiki",
+      "page_id": 13731303,
+      "page_title": "Utilisateur:Denvis1/NCAA-Squelette_équipe",
+      "page_namespace": 2,
+      "page_is_redirect": false,
+      "performer": {
+        "user_text": "Denvis1",
+        "user_groups": [
+          "*",
+          "user",
+          "autoconfirmed",
+          "autopatrolled"
+        ],
+        "user_is_bot": false,
+        "user_id": 1708729,
+        "user_registration_dt": "2013-12-05T20:13:45Z",
+        "user_edit_count": 44703
+      },
+      "rev_id": 177205614,
+      "rev_parent_id": 177203774,
+      "rev_timestamp": "2020-12-02T20:00:58Z",
+      "scores": {
+        "damaging": {
+          "model_name": "damaging",
+          "model_version": "0.5.0",
+          "prediction": [
+            "false"
+          ],
+          "probability": {
+            "false": 0.9157939578158784,
+            "true": 0.08420604218412166
+          }
+        },
+        "goodfaith": {
+          "model_name": "goodfaith",
+          "model_version": "0.5.0",
+          "prediction": [
+            "true"
+          ],
+          "probability": {
+            "false": 0.020923505173598755,
+            "true": 0.9790764948264012
+          }
+        }
+      }
+    }
+  }
+]

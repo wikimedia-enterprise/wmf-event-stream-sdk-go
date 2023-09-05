@@ -1,0 +1,117 @@
+[
+  {
+    "id": [
+      {
+        "topic": "eqiad.mediawiki.revision-create",
+        "partition": 0,
+        "timestamp": 1606924085001
+      },
+      {
+        "topic": "codfw.mediawiki.revision-create",
+        "partition": 0,
+        "offset": -1
+      }
+    ],
+    "data": {
+      "$schema": "/mediawiki/revision/create/1.1.0",
+      "meta": {
+        "uri": "https://commons.wikimedia.org/wiki/Category:Cyprian_Dylczy%C5%84ski",
+        "request_id": "X8e3MgpAIDEAADpYGKwAAAAM",
+        "id": "27c01665-4d58-4d4d-858f-a81a0fd0b792",
+        "dt": "2020-12-02T15:48:05Z",
+        "domain": "commons.wikimedia.org",
+        "stream": "mediawiki.revision-create",
+        "topic": "eqiad.mediawiki.revision-create",
+        "partition": 0,
+        "offset": 2014247839
+      },
+      "database": "commonswiki",
+      "page_id": 21512239,
+      "page_title": "Category:Cyprian_Dylczyński",
+      "page_namespace": 14,
+      "rev_id": 516364180,
+      "rev_timestamp": "2020-12-02T15:48:02Z",
+      "rev_sha1": "9l7wfzoonyo08ijitgih1l720ixjtry",
+      "rev_minor_edit": true,
+      "rev_len": 173,
+      "rev_content_model": "wikitext",
+      "rev_content_format": "text/x-wiki",
+      "performer": {
+        "user_text": "Kawaart",
+        "user_groups": [
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "user_is_bot": false,
+        "user_id": 6510799,
+        "user_registration_dt": "2017-04-14T13:42:00Z",
+        "user_edit_count": 7039
+      },
+      "page_is_redirect": false,
+      "comment": "added [[Category:1836 births]]",
+      "parsedcomment": "added <a href=\"/wiki/Category:1836_births\" title=\"Category:1836 births\">Category:1836 births</a>",
+      "rev_parent_id": 352825217,
+      "rev_content_changed": true,
+      "rev_is_revert": false
+    }
+  },
+  {
+    "id": [
+      {
+        "topic": "eqiad.mediawiki.revision-create",
+        "partition": 0,
+        "timestamp": 1606924088001
+      },
+      {
+        "topic": "codfw.mediawiki.revision-create",
+        "partition": 0,
+        "offset": -1
+      }
+    ],
+    "data": {
+      "$schema": "/mediawiki/revision/create/1.1.0",
+      "meta": {
+        "uri": "https://www.wikidata.org/wiki/Q103437718",
+        "request_id": "X8e3OApAMNgAAJnI69oAAAEE",
+        "id": "86915d1b-03eb-4d64-a4cc-0c617d2e8f04",
+        "dt": "2020-12-02T15:48:08Z",
+        "domain": "www.wikidata.org",
+        "stream": "mediawiki.revision-create",
+        "topic": "eqiad.mediawiki.revision-create",
+        "partition": 0,
+        "offset": 2014247877
+      },
+      "database": "wikidatawiki",
+      "page_id": 99305888,
+      "page_title": "Q103437718",
+      "page_namespace": 0,
+      "rev_id": 1316829186,
+      "rev_timestamp": "2020-12-02T15:48:08Z",
+      "rev_sha1": "575au82maral1pgj5vyoha2r7ylvsix",
+      "rev_minor_edit": false,
+      "rev_len": 3309,
+      "rev_content_model": "wikibase-item",
+      "rev_content_format": "application/json",
+      "performer": {
+        "user_text": "Edoderoobot",
+        "user_groups": [
+          "bot",
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "user_is_bot": true,
+        "user_id": 1554155,
+        "user_registration_dt": "2014-12-24T08:58:28Z",
+        "user_edit_count": 76313068
+      },
+      "page_is_redirect": false,
+      "comment": "/* wbeditentity-update-languages-short:0||nl */ nl-description, [[User:Edoderoobot/Set-nl-description|python code]] - person",
+      "parsedcomment": "<span dir=\"auto\"><span class=\"autocomment\">wbeditentity-update-languages-short:0||nl: </span> nl-description, <a href=\"/wiki/User:Edoderoobot/Set-nl-description\" title=\"User:Edoderoobot/Set-nl-description\">python code</a> - person</span>",
+      "rev_parent_id": 1316775180,
+      "rev_content_changed": true,
+      "rev_is_revert": false
+    }
+  }
+]

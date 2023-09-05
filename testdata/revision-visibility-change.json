@@ -1,0 +1,125 @@
+[
+  {
+    "id": [
+      {
+        "topic": "eqiad.mediawiki.revision-visibility-change",
+        "partition": 0,
+        "timestamp": 1606939261234
+      },
+      {
+        "topic": "codfw.mediawiki.revision-visibility-change",
+        "partition": 0,
+        "offset": -1
+      }
+    ],
+    "data": {
+      "rev_minor_edit": false,
+      "$schema": "/mediawiki/revision/visibility-change/1.0.0",
+      "database": "examplewiki",
+      "page_id": 123,
+      "page_title": "TestPage10",
+      "page_namespace": 0,
+      "rev_id": 123,
+      "rev_timestamp": "2020-06-10T18:57:16Z",
+      "rev_sha1": "mr0szy90m5qbn6tek7ch3nebaild3tm",
+      "meta": {
+        "uri": "https://examplewiki.wikipedia.org/wiki/TestPage10",
+        "dt": "2020-06-10T18:57:16Z",
+        "domain": "test.wikipedia.org",
+        "stream": "mediawiki.revision-visibility-change"
+      },
+      "rev_len": 3,
+      "rev_content_model": "wikitext",
+      "rev_content_format": "text/x-wiki",
+      "performer": {
+        "user_text": "example_user_text",
+        "user_groups": [
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "user_is_bot": false,
+        "user_id": 123,
+        "user_registration_dt": "2016-01-29T21:13:24Z",
+        "user_edit_count": 1
+      },
+      "page_is_redirect": false,
+      "rev_parent_id": 122,
+      "rev_content_changed": true,
+      "visibility": {
+        "text": false,
+        "user": true,
+        "comment": true
+      },
+      "prior_state": {
+        "visibility": {
+          "text": true,
+          "user": true,
+          "comment": true
+        }
+      }
+    }
+  },
+  {
+    "id": [
+      {
+        "topic": "eqiad.mediawiki.revision-visibility-change",
+        "partition": 0,
+        "timestamp": 1606939264321
+      },
+      {
+        "topic": "codfw.mediawiki.revision-visibility-change",
+        "partition": 0,
+        "offset": -1
+      }
+    ],
+    "data": {
+      "rev_minor_edit": false,
+      "$schema": "/mediawiki/revision/visibility-change/1.0.0",
+      "database": "wikidatawiki",
+      "page_id": 66132507,
+      "page_title": "Ytilisateur:Denvis1/NCAA-Squelette_éqoio",
+      "page_namespace": 2,
+      "rev_id": 177205614,
+      "rev_timestamp": "2020-12-02T20:00:55Z",
+      "rev_sha1": "mr0szy90m5qbn6tek7ch3nebaild3tm",
+      "meta": {
+        "uri": "https://fr.wikipedia.org/wiki/Utilisateur:Denvis1/NCAA-Squelette_%C3%A9quipe",
+        "dt": "2020-12-02T20:01:01.611Z",
+        "domain": "www.wikidata.org",
+        "stream": "mediawiki.revision-visibility-change"
+      },
+      "rev_len": 3,
+      "rev_content_model": "wikitext",
+      "rev_content_format": "text/x-wiki",
+      "performer": {
+        "user_text": "Adithyak1997",
+        "user_groups": [
+          "rollbacker",
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "user_is_bot": false,
+        "user_id": 2655754,
+        "user_registration_dt": "2016-02-03T13:19:33Z",
+        "user_edit_count": 49109
+      },
+      "page_is_redirect": false,
+      "rev_parent_id": 1044736099,
+      "rev_content_changed": true,
+      "visibility": {
+        "text": false,
+        "user": true,
+        "comment": true
+      },
+      "prior_state": {
+        "visibility": {
+          "text": true,
+          "user": true,
+          "comment": true
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,106 @@
+[
+  {
+    "id": [
+      {
+        "topic": "eqiad.mediawiki.page-move",
+        "partition": 0,
+        "timestamp": 1606819475001
+      },
+      {
+        "topic": "codfw.mediawiki.page-move",
+        "partition": 0,
+        "offset": -1
+      }
+    ],
+    "data": {
+      "$schema": "/mediawiki/page/move/1.0.0",
+      "meta": {
+        "uri": "https://nl.wikipedia.org/wiki/Coulon_(gemeente)",
+        "request_id": "4fca2cd8-5eb9-436b-9f0a-b4cb039fc6d7",
+        "id": "8c6a8f98-57f0-41ca-8033-c113d34c8b24",
+        "dt": "2020-12-01T10:44:35Z",
+        "domain": "nl.wikipedia.org",
+        "stream": "mediawiki.page-move",
+        "topic": "eqiad.mediawiki.page-move",
+        "partition": 0,
+        "offset": 8409978
+      },
+      "database": "nlwiki",
+      "performer": {
+        "user_text": "AGL",
+        "user_groups": [
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "user_is_bot": false,
+        "user_id": 147337,
+        "user_registration_dt": "2008-01-03T12:23:32Z",
+        "user_edit_count": 216625
+      },
+      "page_id": 504089,
+      "page_title": "Coulon_(gemeente)",
+      "page_namespace": 0,
+      "page_is_redirect": false,
+      "rev_id": 57655779,
+      "prior_state": {
+        "page_title": "Coulon",
+        "page_namespace": 0,
+        "rev_id": 48800727
+      }
+    }
+  },
+  {
+    "id": [
+      {
+        "topic": "eqiad.mediawiki.page-move",
+        "partition": 0,
+        "timestamp": 1606819693001
+      },
+      {
+        "topic": "codfw.mediawiki.page-move",
+        "partition": 0,
+        "offset": -1
+      }
+    ],
+    "data": {
+      "$schema": "/mediawiki/page/move/1.0.0",
+      "meta": {
+        "uri": "https://de.wikipedia.org/wiki/Olson_(Rapper)",
+        "request_id": "2b87d755-3c8c-4619-9a33-4e9ed72bb567",
+        "id": "01f28f17-a56a-49ea-9313-b6a9bc9031b1",
+        "dt": "2020-12-01T10:48:13Z",
+        "domain": "de.wikipedia.org",
+        "stream": "mediawiki.page-move",
+        "topic": "eqiad.mediawiki.page-move",
+        "partition": 0,
+        "offset": 8409984
+      },
+      "database": "dewiki",
+      "performer": {
+        "user_text": "Jack User",
+        "user_groups": [
+          "autoreview",
+          "editor",
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "user_is_bot": false,
+        "user_id": 1481078,
+        "user_registration_dt": "2012-08-12T12:48:24Z",
+        "user_edit_count": 426357
+      },
+      "page_id": 8394444,
+      "page_title": "Olson_(Rapper)",
+      "page_namespace": 0,
+      "page_is_redirect": false,
+      "rev_id": 206122560,
+      "prior_state": {
+        "page_title": "Olson",
+        "page_namespace": 0,
+        "rev_id": 205780436
+      }
+    }
+  }
+]

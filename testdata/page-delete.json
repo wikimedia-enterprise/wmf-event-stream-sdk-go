@@ -1,0 +1,104 @@
+[
+  {
+    "id": [
+      {
+        "topic": "eqiad.mediawiki.page-delete",
+        "partition": 0,
+        "timestamp": 1605727161001
+      },
+      {
+        "topic": "codfw.mediawiki.page-delete",
+        "partition": 0,
+        "offset": -1
+      }
+    ],
+    "data": {
+      "$schema": "/mediawiki/page/delete/1.0.0",
+      "meta": {
+        "uri": "https://mg.wiktionary.org/wiki/r%C3%A9duisit",
+        "request_id": "a2051ad3-a626-46c8-8015-f369185119fb",
+        "id": "702c233d-7613-4e39-8118-bc72f48169a0",
+        "dt": "2020-11-18T19:19:21Z",
+        "domain": "mg.wiktionary.org",
+        "stream": "mediawiki.page-delete",
+        "topic": "eqiad.mediawiki.page-delete",
+        "partition": 0,
+        "offset": 15214567
+      },
+      "database": "mgwiktionary",
+      "performer": {
+        "user_text": "Jagwar",
+        "user_groups": [
+          "ipblock-exempt",
+          "sysop",
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "user_is_bot": false,
+        "user_id": 177,
+        "user_registration_dt": "2008-10-19T08:21:32Z",
+        "user_edit_count": 41238
+      },
+      "page_id": 4656021,
+      "page_title": "réduisit",
+      "page_namespace": 0,
+      "page_is_redirect": false,
+      "rev_id": 22058660,
+      "rev_count": 2,
+      "comment": "[[:m:Requests for comment/Large-scale errors at Malagasy Wiktionary/mg|Famafana ambongadiny vokatry ny fanadihadiana momba ny Wikibolana malagasy]]",
+      "parsedcomment": "<a href=\"https://meta.wikimedia.org/wiki/Requests_for_comment/Large-scale_errors_at_Malagasy_Wiktionary/mg\" class=\"extiw\" title=\"m:Requests for comment/Large-scale errors at Malagasy Wiktionary/mg\">Famafana ambongadiny vokatry ny fanadihadiana momba ny Wikibolana malagasy</a>"
+    }
+  },
+  {
+    "id": [
+      {
+        "topic": "eqiad.mediawiki.page-delete",
+        "partition": 0,
+        "timestamp": 1605727502001
+      },
+      {
+        "topic": "codfw.mediawiki.page-delete",
+        "partition": 0,
+        "offset": -1
+      }
+    ],
+    "data": {
+      "$schema": "/mediawiki/page/delete/1.0.0",
+      "meta": {
+        "uri": "https://mg.wiktionary.org/wiki/r%C3%A9cup%C3%A9reraient",
+        "request_id": "2d72745b-8eaa-4f27-ae58-15ec8e3f4de0",
+        "id": "7be5f371-b661-4ee8-8b9c-6b1b0ee4d91a",
+        "dt": "2020-11-18T19:25:02Z",
+        "domain": "mg.wiktionary.org",
+        "stream": "mediawiki.page-delete",
+        "topic": "eqiad.mediawiki.page-delete",
+        "partition": 0,
+        "offset": 15214867
+      },
+      "database": "mgwiktionary",
+      "performer": {
+        "user_text": "Jagwar",
+        "user_groups": [
+          "ipblock-exempt",
+          "sysop",
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "user_is_bot": false,
+        "user_id": 177,
+        "user_registration_dt": "2008-10-19T08:21:32Z",
+        "user_edit_count": 41238
+      },
+      "page_id": 4656283,
+      "page_title": "récupéreraient",
+      "page_namespace": 0,
+      "page_is_redirect": false,
+      "rev_id": 22110162,
+      "rev_count": 3,
+      "comment": "[[:m:Requests for comment/Large-scale errors at Malagasy Wiktionary/mg|Famafana ambongadiny vokatry ny fanadihadiana momba ny Wikibolana malagasy]]",
+      "parsedcomment": "<a href=\"https://meta.wikimedia.org/wiki/Requests_for_comment/Large-scale_errors_at_Malagasy_Wiktionary/mg\" class=\"extiw\" title=\"m:Requests for comment/Large-scale errors at Malagasy Wiktionary/mg\">Famafana ambongadiny vokatry ny fanadihadiana momba ny Wikibolana malagasy</a>"
+    }
+  }
+]
