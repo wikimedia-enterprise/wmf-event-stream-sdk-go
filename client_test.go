@@ -16,6 +16,7 @@ func TestClient(t *testing.T) {
 	assert.Equal(t, pageDeleteURL, client.options.PageDeleteURL)
 	assert.Equal(t, pageMoveURL, client.options.PageMoveURL)
 	assert.Equal(t, revisionCreateURL, client.options.RevisionCreateURL)
+	assert.Equal(t, pageCreateURL, client.options.PageCreateURL)
 	assert.Equal(t, revisionScoreURL, client.options.RevisionScoreURL)
 	assert.Equal(t, revisionVisibilityChangeURL, client.options.RevisionVisibilityChangeURL)
 }

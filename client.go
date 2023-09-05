@@ -12,6 +12,7 @@ const backoffTime = time.Second * 1
 
 // All the available streams
 const (
+	pageCreateURL               = "/v2/stream/page-create"
 	pageDeleteURL               = "/v2/stream/page-delete"
 	pageMoveURL                 = "/v2/stream/page-move"
 	revisionCreateURL           = "/v2/stream/revision-create"
@@ -26,6 +27,7 @@ func NewClient() *Client {
 		new(http.Client),
 		backoffTime,
 		&Options{
+			pageCreateURL,
 			pageDeleteURL,
 			pageMoveURL,
 			revisionCreateURL,
@@ -41,6 +43,22 @@ type Client struct {
 	httpClient  *http.Client
 	backoffTime time.Duration
 	options     *Options
+}
+
+// PageCreate connect to page create stream
+func (cl *Client) PageCreate(ctx context.Context, since time.Time, handler func(evt *PageCreate) error) *Stream {
+	store := newStorage(since, cl.backoffTime)
+
+	return NewStream(store, func(since time.Time) error {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageCreateURL, store.getSince(), func(msg *Event) {
+			evt := new(PageCreate)
+			parseSchema(evt, msg, store)
+
+			if err := handler(evt); err != nil {
+				store.setError(err)
+			}
+		})
+	})
 }
 
 // PageDelete connect to page delete stream

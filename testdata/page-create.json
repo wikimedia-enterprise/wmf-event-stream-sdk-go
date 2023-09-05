@@ -1,0 +1,130 @@
+[
+  {
+    "id": [
+      {
+        "topic": "eqiad.mediawiki.page-create",
+        "partition": 0,
+        "timestamp": 1606924085001
+      },
+      {
+        "topic": "codfw.mediawiki.page-create",
+        "partition": 0,
+        "offset": -1
+      }
+    ],
+    "data": {
+      "$schema": "/mediawiki/revision/create/1.1.0",
+      "meta": {
+        "uri": "https://en.wikipedia.org/wiki/User_talk:NR_01_RE",
+        "request_id": "18399d1e-5977-43f6-a2ea-0a65ff0d19b5",
+        "id": "1138dfa5-7938-4ba6-bd99-725420c5ed08",
+        "dt": "2022-11-11T15:55:10Z",
+        "domain": "en.wikipedia.org",
+        "stream": "mediawiki.page-create",
+        "topic": "eqiad.mediawiki.page-create",
+        "partition": 0,
+        "offset": 249922269
+      },
+      "database": "enwiki",
+      "page_id": 72231974,
+      "page_title": "User_talk:NR_01_RE",
+      "page_namespace": 3,
+      "rev_id": 1121302102,
+      "rev_timestamp": "2022-11-11T15:55:09Z",
+      "rev_sha1": "r4lvci69mz8a7qo6ordioivfdcovzax",
+      "rev_minor_edit": false,
+      "rev_len": 1262,
+      "rev_content_model": "wikitext",
+      "rev_content_format": "text/x-wiki",
+      "performer": {
+        "user_text": "ClueBot NG",
+        "user_groups": [
+          "bot",
+          "reviewer",
+          "rollbacker",
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "user_is_bot": true,
+        "user_id": 13286072,
+        "user_registration_dt": "2010-10-20T17:01:19Z",
+        "user_edit_count": 6181964
+      },
+      "page_is_redirect": false,
+      "comment": "Warning [[Special:Contributions/NR 01 RE|NR 01 RE]] - #1",
+      "parsedcomment": "Warning <a href=\"/wiki/Special:Contributions/NR_01_RE\" title=\"Special:Contributions/NR 01 RE\">NR 01 RE</a> - #1",
+      "rev_slots": {
+        "main": {
+          "rev_slot_content_model": "wikitext",
+          "rev_slot_sha1": "r4lvci69mz8a7qo6ordioivfdcovzax",
+          "rev_slot_size": 1262,
+          "rev_slot_origin_rev_id": 1121302102
+        }
+      }
+    }
+  },
+  {
+    "id": [
+      {
+        "topic": "eqiad.mediawiki.page-create",
+        "partition": 0,
+        "timestamp": 1606924088001
+      },
+      {
+        "topic": "codfw.mediawiki.page-create",
+        "partition": 0,
+        "offset": -1
+      }
+    ],
+    "data": {
+      "$schema": "/mediawiki/revision/create/1.1.0",
+      "meta": {
+        "uri": "https://en.wiktionary.org/wiki/beaggiefa",
+        "request_id": "f4bbc435-c673-4b37-bc3e-26d28a966226",
+        "id": "99c528bc-15a0-4d0c-a8af-bc2c8467bf93",
+        "dt": "2022-11-16T03:49:20Z",
+        "domain": "en.wiktionary.org",
+        "stream": "mediawiki.page-create",
+        "topic": "eqiad.mediawiki.page-create",
+        "partition": 0,
+        "offset": 250406071
+      },
+      "database": "enwiktionary",
+      "page_id": 9052925,
+      "page_title": "beaggiefa",
+      "page_namespace": 0,
+      "rev_id": 69852686,
+      "rev_timestamp": "2022-11-16T03:49:19Z",
+      "rev_sha1": "kuft4nd1ggpjueya31uiulbqdm8s6dz",
+      "rev_minor_edit": false,
+      "rev_len": 428,
+      "rev_content_model": "wikitext",
+      "rev_content_format": "text/x-wiki",
+      "performer": {
+        "user_text": "Hundwine",
+        "user_groups": [
+          "autopatrolled",
+          "*",
+          "user",
+          "autoconfirmed"
+        ],
+        "user_is_bot": false,
+        "user_id": 3447987,
+        "user_registration_dt": "2018-08-03T19:16:08Z",
+        "user_edit_count": 12508
+      },
+      "page_is_redirect": false,
+      "comment": "Created page with \"==Old English==  ===Alternative forms=== * {{alter|ang|bēagġifa|bēagġyfa|bēahġifa|bēahġyfa}}  ===Etymology=== From {{inh|ang|gmw-pro|*baugagebō}}. Cognate with {{cog|osx|bōggeƀo}} and {{cog|goh|bouggebo}}. Equivalent to {{compound|ang|bēag|ġiefa}}.  ===Pronunciation=== * {{ang-IPA|bēag-ġiefa}}  ===Noun=== {{ang-noun|m|head=bēagġiefa}}  # [[ring]] [[giver]]  ====Declension==== {{ang-decl-noun-n-m|bēagġief}}\"",
+      "parsedcomment": "Created page with &quot;==Old English==  ===Alternative forms=== * {{alter|ang|bēagġifa|bēagġyfa|bēahġifa|bēahġyfa}}  ===Etymology=== From {{inh|ang|gmw-pro|*baugagebō}}. Cognate with {{cog|osx|bōggeƀo}} and {{cog|goh|bouggebo}}. Equivalent to {{compound|ang|bēag|ġiefa}}.  ===Pronunciation=== * {{ang-IPA|bēag-ġiefa}}  ===Noun=== {{ang-noun|m|head=bēagġiefa}}  # <a href=\"/wiki/ring\" title=\"ring\">ring</a> <a href=\"/wiki/giver\" title=\"giver\">giver</a>  ====Declension==== {{ang-decl-noun-n-m|bēagġief}}&quot;",
+      "rev_slots": {
+        "main": {
+          "rev_slot_content_model": "wikitext",
+          "rev_slot_sha1": "kuft4nd1ggpjueya31uiulbqdm8s6dz",
+          "rev_slot_size": 428,
+          "rev_slot_origin_rev_id": 69852686
+        }
+      }
+    }
+  }
+]

@@ -13,11 +13,13 @@ const builderTestBackoffTime = time.Second * 1
 const builderTestPageDeleteURL = "/page-delete"
 const builderTestPageMoveURL = "/page-move"
 const builderTestRevisionCreateURL = "/revision-create"
+const builderTestPageCreateURL = "/page-create"
 const builderTestRevisionScoreURL = "/revision-score"
 const builderTestRevisionVisibilityChangeURL = "/revision-visibility-change"
 
 func TestBuilder(t *testing.T) {
 	options := &Options{
+		builderTestPageCreateURL,
 		builderTestPageDeleteURL,
 		builderTestPageMoveURL,
 		builderTestRevisionCreateURL,
@@ -46,6 +48,7 @@ func TestBuilder(t *testing.T) {
 	assert.Equal(t, builderTestPageDeleteURL, client.options.PageDeleteURL)
 	assert.Equal(t, builderTestPageMoveURL, client.options.PageMoveURL)
 	assert.Equal(t, builderTestRevisionCreateURL, client.options.RevisionCreateURL)
+	assert.Equal(t, builderTestPageCreateURL, client.options.PageCreateURL)
 	assert.Equal(t, builderTestRevisionScoreURL, client.options.RevisionScoreURL)
 	assert.Equal(t, builderTestRevisionVisibilityChangeURL, client.options.RevisionVisibilityChangeURL)
 }
