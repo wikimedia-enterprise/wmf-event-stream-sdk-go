@@ -2,7 +2,7 @@ package eventstream
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"os"
 )
 
@@ -22,7 +22,7 @@ func readStub(name string) ([][]byte, error) {
 
 	defer file.Close()
 
-	body, err := ioutil.ReadAll(file)
+	body, err := io.ReadAll(file)
 
 	if err != nil {
 		return msgs, err
