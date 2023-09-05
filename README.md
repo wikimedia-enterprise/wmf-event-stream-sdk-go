@@ -1,6 +1,7 @@
-# Mediawiki EventStreams client for Go
+# WMF EventStreams client for Go
 
 Reconnect on error (stop only with context):
+
 ```go
 ctx, cancel := context.WithCancel(context.Background())
 client := eventstream.NewClient()
@@ -20,6 +21,7 @@ for err := range stream.Sub() {
 ```
 
 Exit on error:
+
 ```go
 client := eventstream.NewClient()
 stream := client.PageDelete(context.Background(), time.Now(), func(evt *events.PageDelete) {
@@ -35,5 +37,4 @@ if err != nil {
 
 For more information about the stream and how to use it visit [EventStreams](https://stream.wikimedia.org/?doc) documentation.
 
-
-### *Note that we are not supporting all the streams yet, we'll be adding more streams support in the future, feel free to fork the repo or create PR to add new streams.
+### \*Note that we are not supporting all the streams yet, we'll be adding more streams support in the future, feel free to fork the repo or create PR to add new streams.
