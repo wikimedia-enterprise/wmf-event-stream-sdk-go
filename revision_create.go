@@ -33,3 +33,7 @@ func (rc *RevisionCreate) unmarshal(evt *Event) error {
 	rc.ID = evt.ID
 	return json.Unmarshal(evt.Data, &rc.Data)
 }
+
+func (rc *RevisionCreate) hasCanaryEvent() bool {
+	return rc.Data.Meta.Domain == "canary"
+}

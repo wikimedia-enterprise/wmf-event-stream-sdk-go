@@ -20,6 +20,10 @@ func (pd *PageDelete) timestamp() time.Time {
 	return pd.Data.Meta.Dt
 }
 
+func (pd *PageDelete) hasCanaryEvent() bool {
+	return pd.Data.Meta.Domain == "canary"
+}
+
 func (pd *PageDelete) unmarshal(evt *Event) error {
 	pd.ID = evt.ID
 	return json.Unmarshal(evt.Data, &pd.Data)

@@ -7,6 +7,7 @@ import (
 type schema interface {
 	unmarshal(evt *Event) error
 	timestamp() time.Time
+	hasCanaryEvent() bool
 }
 
 func parseSchema(sch schema, msg *Event, store *storage) {
@@ -15,4 +16,8 @@ func parseSchema(sch schema, msg *Event, store *storage) {
 	} else {
 		store.setSince(sch.timestamp())
 	}
+}
+
+func hasCanaryEvent(sch schema) bool {
+	return sch.hasCanaryEvent()
 }

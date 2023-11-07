@@ -28,3 +28,7 @@ func (pm *PageMove) unmarshal(evt *Event) error {
 	pm.ID = evt.ID
 	return json.Unmarshal(evt.Data, &pm.Data)
 }
+
+func (pm *PageMove) hasCanaryEvent() bool {
+	return pm.Data.Meta.Domain == "canary"
+}

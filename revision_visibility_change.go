@@ -42,3 +42,7 @@ func (rvc *RevisionVisibilityChange) unmarshal(evt *Event) error {
 	rvc.ID = evt.ID
 	return json.Unmarshal(evt.Data, &rvc.Data)
 }
+
+func (rvc *RevisionVisibilityChange) hasCanaryEvent() bool {
+	return rvc.Data.Meta.Domain == "canary"
+}
