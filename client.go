@@ -54,7 +54,7 @@ func (cl *Client) PageCreate(ctx context.Context, since time.Time, handler func(
 			evt := new(PageCreate)
 			parseSchema(evt, msg, store)
 
-			if hasCanaryEvent(evt) {
+			if isCanaryEvent(evt) {
 				return
 			}
 
@@ -74,7 +74,7 @@ func (cl *Client) PageDelete(ctx context.Context, since time.Time, handler func(
 			evt := new(PageDelete)
 			parseSchema(evt, msg, store)
 
-			if hasCanaryEvent(evt) {
+			if isCanaryEvent(evt) {
 				return
 			}
 
@@ -94,7 +94,7 @@ func (cl *Client) PageMove(ctx context.Context, since time.Time, handler func(ev
 			evt := new(PageMove)
 			parseSchema(evt, msg, store)
 
-			if hasCanaryEvent(evt) {
+			if isCanaryEvent(evt) {
 				return
 			}
 
@@ -114,7 +114,7 @@ func (cl *Client) RevisionCreate(ctx context.Context, since time.Time, handler f
 			evt := new(RevisionCreate)
 			parseSchema(evt, msg, store)
 
-			if hasCanaryEvent(evt) {
+			if isCanaryEvent(evt) {
 				return
 			}
 
@@ -134,7 +134,7 @@ func (cl *Client) RevisionScore(ctx context.Context, since time.Time, handler fu
 			evt := new(RevisionScore)
 			parseSchema(evt, msg, store)
 
-			if hasCanaryEvent(evt) {
+			if isCanaryEvent(evt) {
 				return
 			}
 
@@ -154,7 +154,7 @@ func (cl *Client) RevisionVisibilityChange(ctx context.Context, since time.Time,
 			evt := new(RevisionVisibilityChange)
 			parseSchema(evt, msg, store)
 
-			if hasCanaryEvent(evt) {
+			if isCanaryEvent(evt) {
 				return
 			}
 

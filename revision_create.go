@@ -34,6 +34,6 @@ func (rc *RevisionCreate) unmarshal(evt *Event) error {
 	return json.Unmarshal(evt.Data, &rc.Data)
 }
 
-func (rc *RevisionCreate) hasCanaryEvent() bool {
+func (rc *RevisionCreate) isCanaryEvent() bool {
 	return rc.Data.Meta.Domain == "canary"
 }

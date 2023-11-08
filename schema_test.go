@@ -36,7 +36,7 @@ func (s *schemaTest) unmarshal(evt *Event) error {
 	return json.Unmarshal(evt.Data, &s.Data)
 }
 
-func (s *schemaTest) hasCanaryEvent() bool {
+func (s *schemaTest) isCanaryEvent() bool {
 	return false
 }
 

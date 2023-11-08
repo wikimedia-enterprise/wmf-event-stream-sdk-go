@@ -5,9 +5,13 @@ import (
 )
 
 type schema interface {
+	canaryEventGetter
 	unmarshal(evt *Event) error
 	timestamp() time.Time
-	hasCanaryEvent() bool
+}
+
+type canaryEventGetter interface {
+	isCanaryEvent() bool
 }
 
 func parseSchema(sch schema, msg *Event, store *storage) {
@@ -18,6 +22,6 @@ func parseSchema(sch schema, msg *Event, store *storage) {
 	}
 }
 
-func hasCanaryEvent(sch schema) bool {
-	return sch.hasCanaryEvent()
+func isCanaryEvent(sch schema) bool {
+	return sch.isCanaryEvent()
 }

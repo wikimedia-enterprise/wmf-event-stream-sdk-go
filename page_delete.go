@@ -20,7 +20,7 @@ func (pd *PageDelete) timestamp() time.Time {
 	return pd.Data.Meta.Dt
 }
 
-func (pd *PageDelete) hasCanaryEvent() bool {
+func (pd *PageDelete) isCanaryEvent() bool {
 	return pd.Data.Meta.Domain == "canary"
 }
 
