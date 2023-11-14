@@ -217,7 +217,3 @@ func (rs *RevisionScore) unmarshal(evt *Event) error {
 	rs.ID = evt.ID
 	return json.Unmarshal(evt.Data, &rs.Data)
 }
-
-func (rs *RevisionScore) isCanaryEvent() bool {
-	return rs.Data.Meta.Domain == "canary"
-}

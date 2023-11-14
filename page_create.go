@@ -29,7 +29,3 @@ func (pc *PageCreate) unmarshal(evt *Event) error {
 	pc.ID = evt.ID
 	return json.Unmarshal(evt.Data, &pc.Data)
 }
-
-func (pc *PageCreate) isCanaryEvent() bool {
-	return pc.Data.Meta.Domain == "canary"
-}

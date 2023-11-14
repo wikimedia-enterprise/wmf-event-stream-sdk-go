@@ -36,10 +36,6 @@ func (s *schemaTest) unmarshal(evt *Event) error {
 	return json.Unmarshal(evt.Data, &s.Data)
 }
 
-func (s *schemaTest) isCanaryEvent() bool {
-	return false
-}
-
 func TestSchema(t *testing.T) {
 	storage := newStorage(schemaTestSince, schemaTestBackoff)
 	schema := new(schemaTest)

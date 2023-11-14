@@ -54,10 +54,6 @@ func (cl *Client) PageCreate(ctx context.Context, since time.Time, handler func(
 			evt := new(PageCreate)
 			parseSchema(evt, msg, store)
 
-			if isCanaryEvent(evt) {
-				return
-			}
-
 			if err := handler(evt); err != nil {
 				store.setError(err)
 			}
@@ -73,10 +69,6 @@ func (cl *Client) PageDelete(ctx context.Context, since time.Time, handler func(
 		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageDeleteURL, store.getSince(), func(msg *Event) {
 			evt := new(PageDelete)
 			parseSchema(evt, msg, store)
-
-			if isCanaryEvent(evt) {
-				return
-			}
 
 			if err := handler(evt); err != nil {
 				store.setError(err)
@@ -94,10 +86,6 @@ func (cl *Client) PageMove(ctx context.Context, since time.Time, handler func(ev
 			evt := new(PageMove)
 			parseSchema(evt, msg, store)
 
-			if isCanaryEvent(evt) {
-				return
-			}
-
 			if err := handler(evt); err != nil {
 				store.setError(err)
 			}
@@ -113,10 +101,6 @@ func (cl *Client) RevisionCreate(ctx context.Context, since time.Time, handler f
 		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionCreateURL, store.getSince(), func(msg *Event) {
 			evt := new(RevisionCreate)
 			parseSchema(evt, msg, store)
-
-			if isCanaryEvent(evt) {
-				return
-			}
 
 			if err := handler(evt); err != nil {
 				store.setError(err)
@@ -134,10 +118,6 @@ func (cl *Client) RevisionScore(ctx context.Context, since time.Time, handler fu
 			evt := new(RevisionScore)
 			parseSchema(evt, msg, store)
 
-			if isCanaryEvent(evt) {
-				return
-			}
-
 			if err := handler(evt); err != nil {
 				store.setError(err)
 			}
@@ -153,10 +133,6 @@ func (cl *Client) RevisionVisibilityChange(ctx context.Context, since time.Time,
 		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionVisibilityChangeURL, store.getSince(), func(msg *Event) {
 			evt := new(RevisionVisibilityChange)
 			parseSchema(evt, msg, store)
-
-			if isCanaryEvent(evt) {
-				return
-			}
 
 			if err := handler(evt); err != nil {
 				store.setError(err)
