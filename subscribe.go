@@ -3,6 +3,7 @@ package eventstream
 import (
 	"bufio"
 	"context"
+	"encoding/json"
 	"net/http"
 	"time"
 )
@@ -47,6 +48,15 @@ func subscribe(ctx context.Context, client *http.Client, url string, since time.
 		}
 
 		if len(evt.ID) > 0 && len(evt.Data) > 0 && err == nil {
+			bsd := new(baseData)
+			if err := json.Unmarshal(evt.Data, bsd); err != nil {
+				return err
+			}
+
+			if bsd.Meta.Domain == "canary" {
+				continue
+			}
+
 			handler(evt)
 			evt = new(Event)
 		}
