@@ -1,0 +1,115 @@
+[
+    {
+        "id": [
+          {
+            "topic": "eqiad.mediawiki.page-change",
+            "partition": 0,
+            "timestamp": 1606924085001
+          },
+          {
+            "topic": "codfw.mediawiki.page-change",
+            "partition": 0,
+            "offset": -1
+          }
+        ],
+        "data": {
+          "$schema": "/mediawiki/page/change/1.1.0",
+          "meta": {
+            "uri": "https://en.wikipedia.org/wiki/User_talk:NR_01_RE",
+            "request_id": "18399d1e-5977-43f6-a2ea-0a65ff0d19b5",
+            "id": "1138dfa5-7938-4ba6-bd99-725420c5ed08",
+            "dt": "2022-11-11T15:55:10Z",
+            "domain": "en.wikipedia.org",
+            "stream": "mediawiki.page-change",
+            "topic": "eqiad.mediawiki.page-change",
+            "partition": 0,
+            "offset": 249922269
+          },
+          "database": "enwiki",
+          "dt": "2022-11-11T15:55:10Z",
+          "page_id": 72231974,
+          "page_title": "User_talk:NR_01_RE",
+          "page_namespace": 3,
+          "rev_id": 1121302102,
+          "performer": {
+            "user_text": "ClueBot NG",
+            "user_groups": [
+              "bot",
+              "reviewer",
+              "rollbacker",
+              "*",
+              "user",
+              "autoconfirmed"
+            ],
+            "user_is_bot": true,
+            "user_id": 13286072,
+            "user_registration_dt": "2010-10-20T17:01:19Z",
+            "user_edit_count": 6181964
+          },
+        "revision": {
+            "rev_id": 1121302102,
+            "rev_dt": "2022-11-11T15:55:10Z"
+        },
+        "wiki_id": "enwiki"
+        }
+      },
+      {
+        "id": [
+          {
+            "topic": "eqiad.mediawiki.page-change",
+            "partition": 0,
+            "timestamp": 1606924085300
+          },
+          {
+            "topic": "codfw.mediawiki.page-change",
+            "partition": 0,
+            "offset": -1
+          }
+        ],
+        "data": {
+          "$schema": "/mediawiki/page/change/1.1.0",
+          "meta": {
+            "uri": "https://en.wikipedia.org/wiki/User_talk:NR_01_RE",
+            "request_id": "18399d1e-5977-43f6-a2ea-0a65ff0d19b5",
+            "id": "1138dfa5-7938-4ba6-bd99-725420c5ejh08",
+            "dt": "2022-11-11T15:67:10Z",
+            "domain": "en.wikipedia.org",
+            "stream": "mediawiki.page-change",
+            "topic": "eqiad.mediawiki.page-change",
+            "partition": 0,
+            "offset": 2499222610
+          },
+          "database": "enwiki",
+          "dt": "2022-11-11T15:67:10Z",
+          "changelog_kind": "update",
+          "page_id": 72231979,
+          "page_title": "User_talk:NR_01_RE",
+          "page": {
+            "page_id": 72231979,
+            "page_title": "User_talk:NR_01_RE"
+          },
+          "page_namespace": 3,
+          "rev_id": 1121302102,
+          "performer": {
+            "user_text": "ClueBot NG",
+            "user_groups": [
+              "bot",
+              "reviewer",
+              "rollbacker",
+              "*",
+              "user",
+              "autoconfirmed"
+            ],
+            "user_is_bot": true,
+            "user_id": 13286072,
+            "user_registration_dt": "2010-10-20T17:01:19Z",
+            "user_edit_count": 6181964
+          },
+        "revision": {
+            "rev_id": 1121302102,
+            "rev_dt": "2022-11-11T15:67:10Z"
+        },
+        "wiki_id": "enwiki"
+        }
+      }
+]
