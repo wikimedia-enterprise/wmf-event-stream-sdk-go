@@ -18,6 +18,7 @@ const (
 	revisionCreateURL           = "/v2/stream/revision-create"
 	revisionScoreURL            = "/v2/stream/revision-score"
 	revisionVisibilityChangeURL = "/v2/stream/mediawiki.revision-visibility-change"
+	pageChangeURL               = "/v2/stream/mediawiki.page-change.v1"
 )
 
 // NewClient creating new connection client
@@ -33,6 +34,7 @@ func NewClient() *Client {
 			revisionCreateURL,
 			revisionScoreURL,
 			revisionVisibilityChangeURL,
+			pageChangeURL,
 		},
 	}
 }
@@ -132,6 +134,22 @@ func (cl *Client) RevisionVisibilityChange(ctx context.Context, since time.Time,
 	return NewStream(store, func(since time.Time) error {
 		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionVisibilityChangeURL, store.getSince(), func(msg *Event) {
 			evt := new(RevisionVisibilityChange)
+			parseSchema(evt, msg, store)
+
+			if err := handler(evt); err != nil {
+				store.setError(err)
+			}
+		})
+	})
+}
+
+// PageChange connect to page change stream
+func (cl *Client) PageChange(ctx context.Context, since time.Time, handler func(evt *PageChange) error) *Stream {
+	store := newStorage(since, cl.backoffTime)
+
+	return NewStream(store, func(since time.Time) error {
+		return subscribe(ctx, cl.httpClient, cl.url+"/v2/stream/mediawiki.page-change.v1", store.getSince(), func(msg *Event) {
+			evt := new(PageChange)
 			parseSchema(evt, msg, store)
 
 			if err := handler(evt); err != nil {
