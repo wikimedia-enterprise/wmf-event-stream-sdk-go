@@ -26,7 +26,7 @@ var pgPageChangeTestResponse = map[int]struct {
 		PageTitle: "User_talk:NR_01_RE",
 		RevID:     1121302102,
 	},
-	9052925: {
+	82231979: {
 		Topic:     "eqiad.mediawiki.page-change",
 		PageTitle: "beaggiefa",
 		RevID:     69852686,
@@ -80,16 +80,20 @@ func createPageChangeServer(t *testing.T, since *time.Time) (http.Handler, error
 }
 
 func testPgChangeEvent(t *testing.T, evt *PageChange) {
-	expected := pgPageChangeTestResponse[evt.Data.PageID]
+	expected, ok := pgPageChangeTestResponse[evt.Data.PageID]
+	if !ok {
+		log.Panicf("unexpected page id: %d", evt.Data.PageID)
+	}
 
 	assert.NotNil(t, expected)
-	assert.Equal(t, expected.Topic, evt.ID[0].Topic)
-	assert.Equal(t, expected.PageTitle, evt.Data.Page.PageTitle)
+	assert.Equal(t, expected.Topic, (*evt).ID[0].Topic)
+	assert.Equal(t, expected.PageTitle, evt.Data.PageTitle)
 	assert.Equal(t, expected.RevID, evt.Data.Revision.RevID)
 }
 
 func TestPgPageChangeExec(t *testing.T) {
-	router, err := createPageChangeServer(t, &pgPageChangeTestSince)
+	since := pgPageChangeTestSince
+	router, err := createPageChangeServer(t, &since)
 	assert.NoError(t, err)
 
 	srv := httptest.NewServer(router)
@@ -102,7 +106,7 @@ func TestPgPageChangeExec(t *testing.T) {
 		}).
 		Build()
 
-	stream := client.PageChange(context.Background(), pgCreateTestSince, func(evt *PageChange) error {
+	stream := client.PageChange(context.Background(), since, func(evt *PageChange) error {
 		testPgChangeEvent(t, evt)
 		return nil
 	})
@@ -111,7 +115,9 @@ func TestPgPageChangeExec(t *testing.T) {
 }
 
 func TestPgPageChangeSub(t *testing.T) {
-	router, err := createPageChangeServer(t, &pgPageChangeTestSince)
+	since := pgPageChangeTestSince
+
+	router, err := createPageChangeServer(t, &since)
 	assert.NoError(t, err)
 
 	srv := httptest.NewServer(router)
@@ -126,7 +132,7 @@ func TestPgPageChangeSub(t *testing.T) {
 
 	ctx, cancel := context.WithCancel(context.Background())
 	msgs := 0
-	stream := client.PageChange(ctx, pgCreateTestSince, func(evt *PageChange) error {
+	stream := client.PageChange(ctx, since, func(evt *PageChange) error {
 		testPgChangeEvent(t, evt)
 		msgs++
 
@@ -137,11 +143,15 @@ func TestPgPageChangeSub(t *testing.T) {
 		return nil
 	})
 
-	assert.Equal(t, context.Canceled, stream.Sub())
+	for err := range stream.Sub() {
+		assert.Contains(t, pgPageChangeTestErrors, err)
+		break
+	}
 }
 
 func TestPgPageChangeSubError(t *testing.T) {
-	router, err := createPageChangeServer(t, &pgPageChangeTestSince)
+	since := pgPageChangeTestSince
+	router, err := createPageChangeServer(t, &since)
 	assert.NoError(t, err)
 
 	srv := httptest.NewServer(router)
@@ -154,20 +164,17 @@ func TestPgPageChangeSubError(t *testing.T) {
 		}).
 		Build()
 
-	ctx, cancel := context.WithCancel(context.Background())
-	msgs := 0
-	stream := client.PageChange(ctx, pgCreateTestSince, func(evt *PageChange) error {
+	ctx := context.Background()
+	stream := client.PageChange(ctx, since, func(evt *PageChange) error {
 		testPgChangeEvent(t, evt)
-		msgs++
-
-		if msgs > 3 {
-			cancel()
-		}
-
+		since = evt.Data.Meta.Dt
 		return errPgPageChangeTest
 	})
 
-	assert.Equal(t, errPgPageChangeTest, stream.Sub())
+	for err := range stream.Sub() {
+		assert.Equal(t, errPgPageChangeTest, err)
+		break
+	}
 }
 
 func TestPgPageChangeSubExecError(t *testing.T) {
@@ -186,7 +193,7 @@ func TestPgPageChangeSubExecError(t *testing.T) {
 
 	ctx, cancel := context.WithCancel(context.Background())
 	msgs := 0
-	stream := client.PageChange(ctx, pgCreateTestSince, func(evt *PageChange) error {
+	stream := client.PageChange(ctx, pgPageChangeTestSince, func(evt *PageChange) error {
 		testPgChangeEvent(t, evt)
 		msgs++
 

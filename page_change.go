@@ -15,11 +15,11 @@ type PageChange struct {
 		Page          struct {
 			PageID    int    `json:"page_id"`
 			PageTitle string `json:"page_title"`
-		}
+		} `json:"page"`
 		Revision struct {
 			RevID int       `json:"rev_id"`
 			RevDt time.Time `json:"rev_dt"`
-		}
+		} `json:"revision"`
 		WikiID string `json:"wiki_id"`
 	}
 }
