@@ -8,4 +8,5 @@ type Options struct {
 	RevisionCreateURL           string
 	RevisionScoreURL            string
 	RevisionVisibilityChangeURL string
+	PageChangeURL               string
 }
