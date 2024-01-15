@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"errors"
-	"fmt"
 	"log"
 	"time"
 
@@ -13,12 +12,14 @@ import (
 func main() {
 	client := eventstream.NewClient()
 
-	stream := client.RevisionScore(context.Background(), time.Now().UTC(), func(evt *eventstream.RevisionScore) error {
-		fmt.Println(evt.Data.Database)
+	dt := time.Date(2014, 1, 1, 0, 0, 0, 0, time.UTC)
+	stream := client.PageChange(context.Background(), dt, func(evt *eventstream.PageChange) error {
+		log.Printf("page title: %s", evt.Data.Page.PageTitle)
 		return errors.New("hello world")
 	})
 
 	for err := range stream.Sub() {
 		log.Println(err)
 	}
+
 }

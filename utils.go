@@ -48,6 +48,5 @@ func readStub(name string) ([][]byte, error) {
 		msg += "data: " + string(data) + "\n"
 		msgs = append(msgs, []byte(msg))
 	}
-
 	return msgs, err
 }
