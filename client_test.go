@@ -19,4 +19,5 @@ func TestClient(t *testing.T) {
 	assert.Equal(t, pageCreateURL, client.options.PageCreateURL)
 	assert.Equal(t, revisionScoreURL, client.options.RevisionScoreURL)
 	assert.Equal(t, revisionVisibilityChangeURL, client.options.RevisionVisibilityChangeURL)
+	assert.Equal(t, pageChangeURL, client.options.PageChangeURL)
 }

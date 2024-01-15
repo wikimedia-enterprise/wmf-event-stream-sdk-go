@@ -148,7 +148,7 @@ func (cl *Client) PageChange(ctx context.Context, since time.Time, handler func(
 	store := newStorage(since, cl.backoffTime)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+"/v2/stream/mediawiki.page-change.v1", store.getSince(), func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageChangeURL, store.getSince(), func(msg *Event) {
 			evt := new(PageChange)
 			parseSchema(evt, msg, store)
 
