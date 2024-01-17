@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// RevisionCreate event scheme struct
+// PageChange event scheme struct
 type PageChange struct {
 	baseSchema
 	Data struct {
