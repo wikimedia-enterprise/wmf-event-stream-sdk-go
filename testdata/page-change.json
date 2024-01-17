@@ -27,8 +27,11 @@
           },
           "database": "enwiki",
           "dt": "2022-11-16T03:49:19Z",
-          "page_id": 72231974,
           "page_title": "User_talk:NR_01_RE",
+          "page": {
+            "page_id": 72231974,
+            "page_title": "User_talk:NR_01_RE"
+          },
           "page_namespace": 3,
           "rev_id": 1121302102,
           "performer": {
@@ -82,7 +85,6 @@
           "database": "enwiki",
           "dt": "2022-11-16T03:49:19Z",
           "changelog_kind": "update",
-          "page_id": 82231979,
           "page_title": "beaggiefa",
           "page": {
             "page_id": 82231979,

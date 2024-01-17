@@ -80,14 +80,14 @@ func createPageChangeServer(t *testing.T, since *time.Time) (http.Handler, error
 }
 
 func testPgChangeEvent(t *testing.T, evt *PageChange) {
-	expected, ok := pgPageChangeTestResponse[evt.Data.PageID]
+	expected, ok := pgPageChangeTestResponse[evt.Data.Page.PageID]
 	if !ok {
-		log.Panicf("unexpected page id: %d", evt.Data.PageID)
+		log.Panicf("unexpected page id: %d", evt.Data.Page.PageID)
 	}
 
 	assert.NotNil(t, expected)
 	assert.Equal(t, expected.Topic, (*evt).ID[0].Topic)
-	assert.Equal(t, expected.PageTitle, evt.Data.PageTitle)
+	assert.Equal(t, expected.PageTitle, evt.Data.Page.PageTitle)
 	assert.Equal(t, expected.RevID, evt.Data.Revision.RevID)
 }
 

@@ -3,6 +3,7 @@ package eventstream
 import (
 	"bufio"
 	"context"
+	"log"
 	"net/http"
 	"time"
 )
@@ -11,6 +12,7 @@ func subscribe(ctx context.Context, client *http.Client, url string, since time.
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url+"?since="+since.UTC().Format(time.RFC3339), nil)
 
 	if err != nil {
+		log.Printf("1 error: %s", err)
 		return err
 	}
 
@@ -20,6 +22,7 @@ func subscribe(ctx context.Context, client *http.Client, url string, since time.
 	res, err := client.Do(req)
 
 	if err != nil {
+		log.Printf("2 error: %s", err)
 		return err
 	}
 
