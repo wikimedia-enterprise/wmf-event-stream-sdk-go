@@ -14,8 +14,10 @@ type PageChange struct {
 		ChangelogKind  string    `json:"changelog_kind"`
 		PageChangeKind string    `json:"page_change_kind"`
 		Page           struct {
-			PageID    int    `json:"page_id"`
-			PageTitle string `json:"page_title"`
+			PageID         int    `json:"page_id"`
+			PageTitle      string `json:"page_title"`
+			PageNamespace  int    `json:"page_namespace"`
+			PageIsRedirect bool   `json:"page_is_redirect"`
 		} `json:"page"`
 		Revision struct {
 			RevID        int       `json:"rev_id"`
