@@ -14,7 +14,6 @@ const builderTestPageDeleteURL = "/page-delete"
 const builderTestPageMoveURL = "/page-move"
 const builderTestRevisionCreateURL = "/revision-create"
 const builderTestPageCreateURL = "/page-create"
-const builderTestRevisionScoreURL = "/revision-score"
 const builderTestRevisionVisibilityChangeURL = "/revision-visibility-change"
 const builderTestPageChangeURL = "/page-change"
 
