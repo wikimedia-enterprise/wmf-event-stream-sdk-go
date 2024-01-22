@@ -32,7 +32,6 @@ func NewClient() *Client {
 			pageDeleteURL,
 			pageMoveURL,
 			revisionCreateURL,
-			revisionScoreURL,
 			revisionVisibilityChangeURL,
 			pageChangeURL,
 		},
@@ -102,22 +101,6 @@ func (cl *Client) RevisionCreate(ctx context.Context, since time.Time, handler f
 	return NewStream(store, func(since time.Time) error {
 		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionCreateURL, store.getSince(), func(msg *Event) {
 			evt := new(RevisionCreate)
-			parseSchema(evt, msg, store)
-
-			if err := handler(evt); err != nil {
-				store.setError(err)
-			}
-		})
-	})
-}
-
-// RevisionScore connect to revision score stream
-func (cl *Client) RevisionScore(ctx context.Context, since time.Time, handler func(evt *RevisionScore) error) *Stream {
-	store := newStorage(since, cl.backoffTime)
-
-	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionScoreURL, store.getSince(), func(msg *Event) {
-			evt := new(RevisionScore)
 			parseSchema(evt, msg, store)
 
 			if err := handler(evt); err != nil {

@@ -24,7 +24,6 @@ func TestBuilder(t *testing.T) {
 		builderTestPageDeleteURL,
 		builderTestPageMoveURL,
 		builderTestRevisionCreateURL,
-		builderTestRevisionScoreURL,
 		builderTestRevisionVisibilityChangeURL,
 		builderTestPageChangeURL,
 	}
@@ -51,7 +50,6 @@ func TestBuilder(t *testing.T) {
 	assert.Equal(t, builderTestPageMoveURL, client.options.PageMoveURL)
 	assert.Equal(t, builderTestRevisionCreateURL, client.options.RevisionCreateURL)
 	assert.Equal(t, builderTestPageCreateURL, client.options.PageCreateURL)
-	assert.Equal(t, builderTestRevisionScoreURL, client.options.RevisionScoreURL)
 	assert.Equal(t, builderTestRevisionVisibilityChangeURL, client.options.RevisionVisibilityChangeURL)
 	assert.Equal(t, builderTestPageChangeURL, client.options.PageChangeURL)
 }
