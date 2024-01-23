@@ -16,7 +16,6 @@ const (
 	pageDeleteURL               = "/v2/stream/page-delete"
 	pageMoveURL                 = "/v2/stream/page-move"
 	revisionCreateURL           = "/v2/stream/revision-create"
-	revisionScoreURL            = "/v2/stream/revision-score"
 	revisionVisibilityChangeURL = "/v2/stream/mediawiki.revision-visibility-change"
 	pageChangeURL               = "/v2/stream/mediawiki.page_change.v1"
 )
