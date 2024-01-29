@@ -10,7 +10,13 @@ type PageMove struct {
 	baseSchema
 	Data struct {
 		baseData
-		PriorState struct {
+		PageID         int    `json:"page_id"`
+		PageTitle      string `json:"page_title"`
+		PageNamespace  int    `json:"page_namespace"`
+		PageIsRedirect bool   `json:"page_is_redirect"`
+		Database       string `json:"database"`
+		RevID          int    `json:"rev_id"`
+		PriorState     struct {
 			PageTitle     string `json:"page_title"`
 			PageNamespace int    `json:"page_namespace"`
 			RevID         int    `json:"rev_id"`

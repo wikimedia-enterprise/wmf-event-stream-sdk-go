@@ -16,8 +16,8 @@ const (
 	pageDeleteURL               = "/v2/stream/page-delete"
 	pageMoveURL                 = "/v2/stream/page-move"
 	revisionCreateURL           = "/v2/stream/revision-create"
-	revisionScoreURL            = "/v2/stream/revision-score"
 	revisionVisibilityChangeURL = "/v2/stream/mediawiki.revision-visibility-change"
+	pageChangeURL               = "/v2/stream/mediawiki.page_change.v1"
 )
 
 // NewClient creating new connection client
@@ -31,8 +31,8 @@ func NewClient() *Client {
 			pageDeleteURL,
 			pageMoveURL,
 			revisionCreateURL,
-			revisionScoreURL,
 			revisionVisibilityChangeURL,
+			pageChangeURL,
 		},
 	}
 }
@@ -109,13 +109,13 @@ func (cl *Client) RevisionCreate(ctx context.Context, since time.Time, handler f
 	})
 }
 
-// RevisionScore connect to revision score stream
-func (cl *Client) RevisionScore(ctx context.Context, since time.Time, handler func(evt *RevisionScore) error) *Stream {
+// RevisionVisibilityChange connect to revision visibility change stream
+func (cl *Client) RevisionVisibilityChange(ctx context.Context, since time.Time, handler func(evt *RevisionVisibilityChange) error) *Stream {
 	store := newStorage(since, cl.backoffTime)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionScoreURL, store.getSince(), func(msg *Event) {
-			evt := new(RevisionScore)
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionVisibilityChangeURL, store.getSince(), func(msg *Event) {
+			evt := new(RevisionVisibilityChange)
 			parseSchema(evt, msg, store)
 
 			if err := handler(evt); err != nil {
@@ -125,13 +125,13 @@ func (cl *Client) RevisionScore(ctx context.Context, since time.Time, handler fu
 	})
 }
 
-// RevisionVisibilityChange connect to revision visibility change stream
-func (cl *Client) RevisionVisibilityChange(ctx context.Context, since time.Time, handler func(evt *RevisionVisibilityChange) error) *Stream {
+// PageChange connect to page change stream
+func (cl *Client) PageChange(ctx context.Context, since time.Time, handler func(evt *PageChange) error) *Stream {
 	store := newStorage(since, cl.backoffTime)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionVisibilityChangeURL, store.getSince(), func(msg *Event) {
-			evt := new(RevisionVisibilityChange)
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageChangeURL, store.getSince(), func(msg *Event) {
+			evt := new(PageChange)
 			parseSchema(evt, msg, store)
 
 			if err := handler(evt); err != nil {

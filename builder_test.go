@@ -14,8 +14,8 @@ const builderTestPageDeleteURL = "/page-delete"
 const builderTestPageMoveURL = "/page-move"
 const builderTestRevisionCreateURL = "/revision-create"
 const builderTestPageCreateURL = "/page-create"
-const builderTestRevisionScoreURL = "/revision-score"
 const builderTestRevisionVisibilityChangeURL = "/revision-visibility-change"
+const builderTestPageChangeURL = "/page-change"
 
 func TestBuilder(t *testing.T) {
 	options := &Options{
@@ -23,8 +23,8 @@ func TestBuilder(t *testing.T) {
 		builderTestPageDeleteURL,
 		builderTestPageMoveURL,
 		builderTestRevisionCreateURL,
-		builderTestRevisionScoreURL,
 		builderTestRevisionVisibilityChangeURL,
+		builderTestPageChangeURL,
 	}
 	httpClient := http.Client{
 		Transport: &http.Transport{
@@ -49,6 +49,6 @@ func TestBuilder(t *testing.T) {
 	assert.Equal(t, builderTestPageMoveURL, client.options.PageMoveURL)
 	assert.Equal(t, builderTestRevisionCreateURL, client.options.RevisionCreateURL)
 	assert.Equal(t, builderTestPageCreateURL, client.options.PageCreateURL)
-	assert.Equal(t, builderTestRevisionScoreURL, client.options.RevisionScoreURL)
 	assert.Equal(t, builderTestRevisionVisibilityChangeURL, client.options.RevisionVisibilityChangeURL)
+	assert.Equal(t, builderTestPageChangeURL, client.options.PageChangeURL)
 }

@@ -10,6 +10,12 @@ type RevisionVisibilityChange struct {
 	baseSchema
 	Data struct {
 		baseData
+		PageID           int       `json:"page_id"`
+		PageTitle        string    `json:"page_title"`
+		PageNamespace    int       `json:"page_namespace"`
+		PageIsRedirect   bool      `json:"page_is_redirect"`
+		Database         string    `json:"database"`
+		RevID            int       `json:"rev_id"`
 		RevTimestamp     time.Time `json:"rev_timestamp"`
 		RevSha1          string    `json:"rev_sha1"`
 		RevMinorEdit     bool      `json:"rev_minor_edit"`
