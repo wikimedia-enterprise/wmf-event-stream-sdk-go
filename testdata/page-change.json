@@ -1,117 +1,169 @@
 [
     {
-        "id": [
-          {
-            "topic": "eqiad.mediawiki.page-change",
-            "partition": 0,
-            "timestamp": 1606924085001
-          },
-          {
-            "topic": "codfw.mediawiki.page-change",
-            "partition": 0,
-            "offset": -1
-          }
-        ],
-        "data": {
-          "$schema": "/mediawiki/page/change/1.1.0",
-          "meta": {
-            "uri": "https://en.wikipedia.org/wiki/User_talk:NR_01_RE",
-            "request_id": "18399d1e-5977-43f6-a2ea-0a65ff0d19b5",
-            "id": "1138dfa5-7938-4ba6-bd99-725420c5ed08",
-            "dt": "2022-11-16T03:49:19Z",
-            "domain": "en.wikipedia.org",
-            "stream": "mediawiki.page-change",
-            "topic": "eqiad.mediawiki.page-change",
-            "partition": 0,
-            "offset": 249922269
-          },
-          "database": "enwiki",
-          "dt": "2022-11-16T03:49:19Z",
-          "page_title": "User_talk:NR_01_RE",
-          "page": {
-            "page_id": 72231974,
-            "page_title": "User_talk:NR_01_RE"
-          },
-          "page_namespace": 3,
-          "rev_id": 1121302102,
-          "performer": {
-            "user_text": "ClueBot NG",
-            "user_groups": [
-              "bot",
-              "reviewer",
-              "rollbacker",
-              "*",
-              "user",
-              "autoconfirmed"
-            ],
-            "user_is_bot": true,
-            "user_id": 13286072,
-            "user_registration_dt": "2010-10-20T17:01:19Z",
-            "user_edit_count": 6181964
-          },
-        "revision": {
-            "rev_id": 1121302102,
-            "rev_dt": "2022-11-11T15:55:10Z"
+        "changelog_kind": "update",
+        "page_change_kind": "move",
+        "dt": "2024-09-12T06:58:34Z",
+        "wiki_id": "enwiki",
+        "page": {
+            "page_id": 77777155,
+            "page_title": "Varvara_Prohorova",
+            "namespace_id": 0,
+            "is_redirect": false
         },
-        "wiki_id": "enwiki"
-        }
-    },
-      {
-        "id": [
-          {
-            "topic": "eqiad.mediawiki.page-change",
-            "partition": 0,
-            "timestamp": 1606924085300
-          },
-          {
-            "topic": "codfw.mediawiki.page-change",
-            "partition": 0,
-            "offset": -1
-          }
-        ],
-        "data": {
-          "$schema": "/mediawiki/page/change/1.1.0",
-          "meta": {
-            "uri": "https://en.wikipedia.org/wiki/User_talk:NR_01_RE",
-            "request_id": "18399d1e-5977-43f6-a2ea-0a65ff0d19b5",
-            "id": "1138dfa5-7938-4ba6-bd99-725420c5ejh08",
-            "dt": "2022-11-16T03:49:19Z",
-            "domain": "en.wikipedia.org",
-            "stream": "mediawiki.page-change",
-            "topic": "eqiad.mediawiki.page-change",
-            "partition": 0,
-            "offset": 2499222610
-          },
-          "database": "enwiki",
-          "dt": "2022-11-16T03:49:19Z",
-          "changelog_kind": "update",
-          "page_title": "beaggiefa",
-          "page": {
-            "page_id": 82231979,
-            "page_title": "beaggiefa"
-          },
-          "page_namespace": 3,
-          "rev_id": 69852686,
-          "performer": {
-            "user_text": "ClueBot NG",
-            "user_groups": [
-              "bot",
-              "reviewer",
-              "rollbacker",
-              "*",
-              "user",
-              "autoconfirmed"
+        "performer": {
+            "user_text": "Svidrigayloff",
+            "groups": [
+            "*",
+            "user",
+            "autoconfirmed"
             ],
-            "user_is_bot": true,
-            "user_id": 13286072,
-            "user_registration_dt": "2010-10-20T17:01:19Z",
-            "user_edit_count": 6181964
-          },
-        "revision": {
-            "rev_id": 69852686,
-            "rev_dt": "2022-11-11T15:47:10Z"
+            "is_bot": false,
+            "is_system": false,
+            "is_temp": false,
+            "user_id": 48379723,
+            "registration_dt": "2024-09-02T20:45:03Z",
+            "edit_count": 10
         },
-        "wiki_id": "enwiki"
+        "comment": "Перенос черновика в основное пространство",
+        "revision": {
+            "rev_id": 1245305770,
+            "rev_dt": "2024-09-12T06:58:34Z",
+            "is_minor_edit": true,
+            "rev_sha1": "6rpcn3pnyzo5zo1k3h92i4cry775thy",
+            "rev_size": 17652,
+            "rev_parent_id": 1244038894,
+            "comment": "Svidrigayloff moved page [[Draft:Varvara Prohorova]] to [[Varvara Prohorova]]: Перенос черновика в основное пространство",
+            "editor": {
+            "user_text": "Svidrigayloff",
+            "groups": [
+                "*",
+                "user",
+                "autoconfirmed"
+            ],
+            "is_bot": false,
+            "is_system": false,
+            "is_temp": false,
+            "user_id": 48379723,
+            "registration_dt": "2024-09-02T20:45:03Z",
+            "edit_count": 10
+            },
+            "is_content_visible": true,
+            "is_editor_visible": true,
+            "is_comment_visible": true,
+            "content_slots": {
+            "main": {
+                "slot_role": "main",
+                "content_model": "wikitext",
+                "content_sha1": "6rpcn3pnyzo5zo1k3h92i4cry775thy",
+                "content_size": 17652,
+                "content_format": "text/x-wiki",
+                "origin_rev_id": 1244038894
+            }
+            }
+        },
+        "created_redirect_page": {
+            "page_id": 77849657,
+            "page_title": "Draft:Varvara_Prohorova",
+            "namespace_id": 118,
+            "is_redirect": true
+        },
+        "prior_state": {
+            "page": {
+            "page_title": "Draft:Varvara_Prohorova",
+            "namespace_id": 118
+            },
+            "revision": {
+            "rev_id": 1244038894,
+            "rev_dt": "2024-09-04T18:34:08Z",
+            "is_minor_edit": false,
+            "rev_sha1": "6rpcn3pnyzo5zo1k3h92i4cry775thy",
+            "rev_size": 17652,
+            "rev_parent_id": 1244038281,
+            "comment": "",
+            "editor": {
+                "user_text": "Svidrigayloff",
+                "groups": [
+                "*",
+                "user",
+                "autoconfirmed"
+                ],
+                "is_bot": false,
+                "is_system": false,
+                "is_temp": false,
+                "user_id": 48379723,
+                "registration_dt": "2024-09-02T20:45:03Z",
+                "edit_count": 12
+            },
+            "is_content_visible": true,
+            "is_editor_visible": true,
+            "is_comment_visible": true,
+            "content_slots": {
+                "main": {
+                "slot_role": "main",
+                "content_model": "wikitext",
+                "content_sha1": "6rpcn3pnyzo5zo1k3h92i4cry775thy",
+                "content_size": 17652,
+                "content_format": "text/x-wiki",
+                "origin_rev_id": 1244038894
+                }
+            }
+            }
+        },
+        "$schema": "/mediawiki/page/change/1.2.0",
+        "meta": {
+            "stream": "mediawiki.page_change.v1",
+            "uri": "https://en.wikipedia.org/wiki/Varvara_Prohorova",
+            "id": "407f0254-d175-4fab-a299-a513498cbe31",
+            "request_id": "ab8b5b79-a8b2-4f4e-b491-f313864273c1",
+            "domain": "en.wikipedia.org",
+            "dt": "2024-09-12T06:58:40Z",
+            "topic": "eqiad.mediawiki.page_change.v1",
+            "partition": 0,
+            "offset": 516188566,
+            "key": {
+            "type": "Buffer",
+            "data": [
+                123,
+                34,
+                119,
+                105,
+                107,
+                105,
+                95,
+                105,
+                100,
+                34,
+                58,
+                34,
+                101,
+                110,
+                119,
+                105,
+                107,
+                105,
+                34,
+                44,
+                34,
+                112,
+                97,
+                103,
+                101,
+                95,
+                105,
+                100,
+                34,
+                58,
+                55,
+                55,
+                55,
+                55,
+                55,
+                49,
+                53,
+                53,
+                125
+            ]
+            }
         }
-      }
+    }
 ]
