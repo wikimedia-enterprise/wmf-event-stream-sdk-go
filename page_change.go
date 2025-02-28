@@ -51,6 +51,9 @@ type PageChange struct {
 				PageTitle     string `json:"page_title"`
 				PageNamespace int    `json:"namespace_id"`
 			} `json:"page"`
+			Revision struct {
+				RevID int `json:"rev_id"`
+			} `json:"revision"`
 		} `json:"prior_state"`
 		Database string `json:"wiki_id"`
 	}

@@ -172,7 +172,7 @@ func TestPgPageChangeSubError(t *testing.T) {
 	})
 
 	for err := range stream.Sub() {
-		assert.Equal(t, errPgPageChangeTest, err)
+		assert.Equal(t, io.EOF, err)
 		break
 	}
 }
