@@ -20,9 +20,12 @@ const (
 	pageChangeURL               = "/v2/stream/mediawiki.page_change.v1"
 )
 
+// ClientOption enables optional configuration for the client.
+type ClientOption func(*Client)
+
 // NewClient creating new connection client
-func NewClient() *Client {
-	return &Client{
+func NewClient(ops ...ClientOption) *Client {
+	clt := &Client{
 		url,
 		new(http.Client),
 		backoffTime,
@@ -34,7 +37,15 @@ func NewClient() *Client {
 			revisionVisibilityChangeURL,
 			pageChangeURL,
 		},
+		"",
 	}
+
+	// Apply optional configurations
+	for _, opt := range ops {
+		opt(clt)
+	}
+
+	return clt
 }
 
 // Client request client
@@ -43,6 +54,7 @@ type Client struct {
 	httpClient  *http.Client
 	backoffTime time.Duration
 	options     *Options
+	userAgent   string
 }
 
 // PageCreate connect to page create stream
@@ -50,7 +62,7 @@ func (cl *Client) PageCreate(ctx context.Context, since time.Time, handler func(
 	store := newStorage(since, cl.backoffTime)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageCreateURL, store.getSince(), func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageCreateURL, store.getSince(), cl.userAgent, func(msg *Event) {
 			evt := new(PageCreate)
 			parseSchema(evt, msg, store)
 
@@ -66,7 +78,7 @@ func (cl *Client) PageDelete(ctx context.Context, since time.Time, handler func(
 	store := newStorage(since, cl.backoffTime)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageDeleteURL, store.getSince(), func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageDeleteURL, store.getSince(), cl.userAgent, func(msg *Event) {
 			evt := new(PageDelete)
 			parseSchema(evt, msg, store)
 
@@ -82,7 +94,7 @@ func (cl *Client) PageMove(ctx context.Context, since time.Time, handler func(ev
 	store := newStorage(since, cl.backoffTime)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageMoveURL, store.getSince(), func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageMoveURL, store.getSince(), cl.userAgent, func(msg *Event) {
 			evt := new(PageMove)
 			parseSchema(evt, msg, store)
 
@@ -98,7 +110,7 @@ func (cl *Client) RevisionCreate(ctx context.Context, since time.Time, handler f
 	store := newStorage(since, cl.backoffTime)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionCreateURL, store.getSince(), func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionCreateURL, store.getSince(), cl.userAgent, func(msg *Event) {
 			evt := new(RevisionCreate)
 			parseSchema(evt, msg, store)
 
@@ -114,7 +126,7 @@ func (cl *Client) RevisionVisibilityChange(ctx context.Context, since time.Time,
 	store := newStorage(since, cl.backoffTime)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionVisibilityChangeURL, store.getSince(), func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionVisibilityChangeURL, store.getSince(), cl.userAgent, func(msg *Event) {
 			evt := new(RevisionVisibilityChange)
 			parseSchema(evt, msg, store)
 
@@ -130,7 +142,7 @@ func (cl *Client) PageChange(ctx context.Context, since time.Time, handler func(
 	store := newStorage(since, cl.backoffTime)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageChangeURL, store.getSince(), func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageChangeURL, store.getSince(), cl.userAgent, func(msg *Event) {
 			evt := new(PageChange)
 			parseSchema(evt, msg, store)
 

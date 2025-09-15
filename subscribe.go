@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func subscribe(ctx context.Context, client *http.Client, url string, since time.Time, handler func(evt *Event)) error {
+func subscribe(ctx context.Context, client *http.Client, url string, since time.Time, useragent string, handler func(evt *Event)) error {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url+"?since="+since.UTC().Format(time.RFC3339), nil)
 
 	if err != nil {
@@ -18,6 +18,11 @@ func subscribe(ctx context.Context, client *http.Client, url string, since time.
 	req.Header.Set("Cache-Control", "no-cache")
 	req.Header.Set("Accept", "text/event-stream")
 	req.Header.Set("Connection", "keep-alive")
+
+	if useragent != "" {
+		req.Header.Set("User-Agent", useragent)
+	}
+
 	res, err := client.Do(req)
 
 	if err != nil {

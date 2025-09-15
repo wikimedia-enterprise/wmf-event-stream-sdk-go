@@ -9,6 +9,7 @@ import (
 )
 
 const builderTestURL = "http://localhost:5000"
+const builderTestUserAgent = "test-useragent"
 const builderTestBackoffTime = time.Second * 1
 const builderTestPageDeleteURL = "/page-delete"
 const builderTestPageMoveURL = "/page-move"
@@ -38,6 +39,7 @@ func TestBuilder(t *testing.T) {
 		HTTPClient(&httpClient).
 		BackoffTime(builderTestBackoffTime).
 		Options(options).
+		UserAgent(builderTestUserAgent).
 		Build()
 
 	assert.NotNil(t, client)
@@ -45,6 +47,7 @@ func TestBuilder(t *testing.T) {
 	assert.NotNil(t, client.httpClient.Transport)
 	assert.Equal(t, builderTestBackoffTime, client.backoffTime)
 	assert.Equal(t, builderTestURL, client.url)
+	assert.Equal(t, builderTestUserAgent, client.userAgent)
 	assert.Equal(t, builderTestPageDeleteURL, client.options.PageDeleteURL)
 	assert.Equal(t, builderTestPageMoveURL, client.options.PageMoveURL)
 	assert.Equal(t, builderTestRevisionCreateURL, client.options.RevisionCreateURL)
