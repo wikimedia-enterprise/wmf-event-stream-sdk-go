@@ -20,11 +20,8 @@ const (
 	pageChangeURL               = "/v2/stream/mediawiki.page_change.v1"
 )
 
-// ClientOption enables optional configuration for the client.
-type ClientOption func(*Client)
-
 // NewClient creating new connection client
-func NewClient(ops ...ClientOption) *Client {
+func NewClient() *Client {
 	clt := &Client{
 		url,
 		new(http.Client),
@@ -40,12 +37,12 @@ func NewClient(ops ...ClientOption) *Client {
 		"",
 	}
 
-	// Apply optional configurations
-	for _, opt := range ops {
-		opt(clt)
-	}
-
 	return clt
+}
+
+// SetUserAgent sets a client with useragent.
+func (c *Client) SetUserAgent(ua string) {
+	c.userAgent = ua
 }
 
 // Client request client
