@@ -22,7 +22,7 @@ const (
 
 // NewClient creating new connection client
 func NewClient() *Client {
-	clt := &Client{
+	return &Client{
 		url,
 		new(http.Client),
 		backoffTime,
@@ -36,8 +36,6 @@ func NewClient() *Client {
 		},
 		"",
 	}
-
-	return clt
 }
 
 // SetUserAgent sets a client with useragent.
