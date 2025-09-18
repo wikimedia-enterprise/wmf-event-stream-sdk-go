@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"errors"
 	"log"
 	"time"
 
@@ -11,11 +10,12 @@ import (
 
 func main() {
 	client := eventstream.NewClient()
+	client.SetUserAgent("my-useragent contact@mymail.com")
 
 	dt := time.Date(2014, 1, 1, 0, 0, 0, 0, time.UTC)
 	stream := client.PageChange(context.Background(), dt, func(evt *eventstream.PageChange) error {
 		log.Printf("page title: %s", evt.Data.Page.PageTitle)
-		return errors.New("hello world")
+		return nil
 	})
 
 	for err := range stream.Sub() {

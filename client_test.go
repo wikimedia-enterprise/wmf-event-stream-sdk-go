@@ -12,6 +12,7 @@ func TestClient(t *testing.T) {
 	assert.NotNil(t, client)
 	assert.NotNil(t, client.httpClient)
 	assert.Equal(t, url, client.url)
+	assert.Equal(t, "", client.userAgent)
 	assert.Equal(t, backoffTime, client.backoffTime)
 	assert.Equal(t, pageDeleteURL, client.options.PageDeleteURL)
 	assert.Equal(t, pageMoveURL, client.options.PageMoveURL)
@@ -19,4 +20,7 @@ func TestClient(t *testing.T) {
 	assert.Equal(t, pageCreateURL, client.options.PageCreateURL)
 	assert.Equal(t, revisionVisibilityChangeURL, client.options.RevisionVisibilityChangeURL)
 	assert.Equal(t, pageChangeURL, client.options.PageChangeURL)
+
+	client.SetUserAgent("test-useragent")
+	assert.Equal(t, "test-useragent", client.userAgent)
 }

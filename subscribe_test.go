@@ -18,6 +18,7 @@ var subscribeTestSince = time.Now().UTC()
 
 const subscribeTestTitle = "hello world"
 const subscribeTestURL = "/subscribe"
+const subscribeTestUserAgent = "test-useragent"
 const subscribeTestTime = 1605631446001
 const subscribeTestTopic = "mediaiki.eventstream.test"
 const subscribeTestMsgCount = 10
@@ -60,7 +61,7 @@ func TestSubscribe(t *testing.T) {
 	client := new(http.Client)
 	msgs := 0
 
-	err := subscribe(ctx, client, srv.URL+subscribeTestURL, subscribeTestSince, func(evt *Event) {
+	err := subscribe(ctx, client, srv.URL+subscribeTestURL, subscribeTestSince, subscribeTestUserAgent, func(evt *Event) {
 		assert.NotNil(t, evt)
 		assert.Equal(t, len(evt.ID), 2)
 		assert.Equal(t, evt.ID[0].Timestamp, subscribeTestTime)

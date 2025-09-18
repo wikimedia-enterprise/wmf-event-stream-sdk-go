@@ -41,6 +41,12 @@ func (cb *ClientBuilder) Options(options *Options) *ClientBuilder {
 	return cb
 }
 
+// UserAgent sets useragent for the client
+func (cb *ClientBuilder) UserAgent(ua string) *ClientBuilder {
+	cb.client.userAgent = ua
+	return cb
+}
+
 // Build create new client with provided configuration
 func (cb *ClientBuilder) Build() *Client {
 	return cb.client
