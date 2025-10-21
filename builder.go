@@ -9,6 +9,7 @@ import (
 func NewBuilder() *ClientBuilder {
 	cb := new(ClientBuilder)
 	cb.client = NewClient()
+	cb.client.metrics = Metrics{enabled: false}
 	return cb
 }
 
@@ -47,7 +48,17 @@ func (cb *ClientBuilder) UserAgent(ua string) *ClientBuilder {
 	return cb
 }
 
+// UserAgent sets useragent for the client
+func (cb *ClientBuilder) WithMetrics() *ClientBuilder {
+	cb.client.metrics = Metrics{enabled: true}
+	return cb
+}
+
 // Build create new client with provided configuration
 func (cb *ClientBuilder) Build() *Client {
+	if cb.client.metrics.IsEnabled() {
+		cb.client.metrics.Enable()
+	}
+
 	return cb.client
 }
