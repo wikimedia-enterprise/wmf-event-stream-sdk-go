@@ -16,7 +16,7 @@ import (
 var errPgPageChangeTest = errors.New("page change test error")
 var pgPageChangeTestErrors = []error{io.EOF, io.EOF, context.Canceled}
 var pgPageChangeTestSince = time.Now().UTC()
-var pgPageChangeTestResponse = map[int]struct {
+var pgPageChangeTestResponse = map[int64]struct {
 	Topic     string
 	PageTitle string
 	RevID     int
