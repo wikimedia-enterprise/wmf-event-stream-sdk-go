@@ -16,7 +16,7 @@ import (
 var errPgPageChangeTest = errors.New("page change test error")
 var pgPageChangeTestErrors = []error{io.EOF, io.EOF, context.Canceled}
 var pgPageChangeTestSince = time.Now().UTC()
-var pgPageChangeTestResponse = map[int]struct {
+var pgPageChangeTestResponse = map[int64]struct {
 	Topic     string
 	PageTitle string
 	RevID     int
@@ -32,6 +32,19 @@ var pgPageChangeTestResponse = map[int]struct {
 		RevID:     69852686,
 	},
 }
+var pgPageChangeLargeRevIDTestResponse = map[int64]struct {
+	Topic     string
+	PageTitle string
+	RevID     int
+}{
+	77777155: {
+		Topic:     "eqiad.mediawiki.page-change",
+		PageTitle: "Varvara_Prohorova",
+		RevID:     5000000000,
+	},
+}
+
+const pgPageChangeLargeRevIDTestURL = "/page-change-large-revid"
 
 const pgPageChangeTestExecURL = "/page-change-exec"
 const pgPageChangeTestSubURL = "/page-change-sub"
@@ -205,4 +218,57 @@ func TestPgPageChangeSubExecError(t *testing.T) {
 	})
 
 	assert.Equal(t, io.EOF, stream.Exec())
+}
+
+func TestPgPageChangeLargeRevisionID(t *testing.T) {
+	since := pgPageChangeTestSince
+
+	router := http.NewServeMux()
+	stubs, err := readStub("page-change-large-revid.json")
+	assert.NoError(t, err)
+
+	router.HandleFunc(pgPageChangeLargeRevIDTestURL, func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, since.Format(time.RFC3339), r.URL.Query().Get("since"))
+
+		f := w.(http.Flusher)
+
+		for _, stub := range stubs {
+			_, err = w.Write(stub)
+
+			if err != nil {
+				log.Panic(err)
+			} else {
+				f.Flush()
+			}
+		}
+	})
+
+	srv := httptest.NewServer(router)
+	defer srv.Close()
+
+	client := NewBuilder().
+		URL(srv.URL).
+		Options(&Options{
+			PageChangeURL: pgPageChangeLargeRevIDTestURL,
+		}).
+		Build()
+
+	eventReceived := false
+	stream := client.PageChange(context.Background(), since, func(evt *PageChange) error {
+		expected, ok := pgPageChangeLargeRevIDTestResponse[evt.Data.Page.PageID]
+		if !ok {
+			log.Panicf("unexpected page id: %d", evt.Data.Page.PageID)
+		}
+
+		assert.Equal(t, expected.Topic, (*evt).ID[0].Topic)
+		assert.Equal(t, expected.PageTitle, evt.Data.Page.PageTitle)
+		assert.Equal(t, expected.RevID, evt.Data.Revision.RevID, "RevID should be 5000000000 without downcasting")
+		assert.Greater(t, evt.Data.Revision.RevID, int(1<<32), "RevID should be greater than 2^32")
+
+		eventReceived = true
+		return nil
+	})
+
+	assert.Equal(t, io.EOF, stream.Exec())
+	assert.True(t, eventReceived, "Event with large revision ID should have been received")
 }

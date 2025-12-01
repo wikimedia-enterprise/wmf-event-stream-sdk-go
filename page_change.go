@@ -23,13 +23,13 @@ type PageChange struct {
 		ChangelogKind  string    `json:"changelog_kind"`
 		PageChangeKind string    `json:"page_change_kind"`
 		Page           struct {
-			PageID         int    `json:"page_id"`
+			PageID         int64  `json:"page_id"`
 			PageTitle      string `json:"page_title"`
 			PageNamespace  int    `json:"namespace_id"`
 			PageIsRedirect bool   `json:"is_redirect"`
 		} `json:"page"`
 		Revision struct {
-			RevID        int       `json:"rev_id"`
+			RevID        int64     `json:"rev_id"`
 			RevDt        time.Time `json:"rev_dt"`
 			Comment      string    `json:"comment"`
 			ContentSlots struct {
@@ -42,7 +42,7 @@ type PageChange struct {
 			IsContentVisible bool   `json:"is_content_visible"`
 			IsEditorVisible  bool   `json:"is_editor_visible"`
 			IsMinorEdit      bool   `json:"is_minor_edit"`
-			RevParentID      int    `json:"rev_parent_id"`
+			RevParentID      int64  `json:"rev_parent_id"`
 			RevSha1          string `json:"rev_sha1"`
 			RevSize          int    `json:"rev_size"`
 		} `json:"revision"`
@@ -52,7 +52,7 @@ type PageChange struct {
 				PageNamespace int    `json:"namespace_id"`
 			} `json:"page"`
 			Revision struct {
-				RevID int `json:"rev_id"`
+				RevID int64 `json:"rev_id"`
 			} `json:"revision"`
 		} `json:"prior_state"`
 		Database string `json:"wiki_id"`
