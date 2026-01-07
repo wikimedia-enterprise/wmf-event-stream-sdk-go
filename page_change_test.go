@@ -103,7 +103,12 @@ func testPgChangeEvent(t *testing.T, evt *PageChange) {
 	assert.Equal(t, expected.PageTitle, evt.Data.Page.PageTitle)
 	assert.Equal(t, expected.RevID, evt.Data.Revision.RevID)
 
+	// Validate editor field
+	assert.NotEmpty(t, evt.Data.Revision.Editor.UserText, "Editor.UserText should not be empty")
 	assert.NotNil(t, evt.Data.Revision.Editor.UserGroups, "Editor.UserGroups should not be nil")
+	assert.GreaterOrEqual(t, evt.Data.Revision.Editor.UserID, 0, "Editor.UserID should be non-negative")
+	assert.False(t, evt.Data.Revision.Editor.UserRegistrationDt.IsZero(), "Editor.UserRegistrationDt should be set")
+	assert.GreaterOrEqual(t, evt.Data.Revision.Editor.UserEditCount, 0, "Editor.UserEditCount should be non-negative")
 }
 
 func TestPgPageChangeExec(t *testing.T) {
@@ -267,7 +272,12 @@ func TestPgPageChangeLargeRevisionID(t *testing.T) {
 		assert.Equal(t, expected.RevID, evt.Data.Revision.RevID, "RevID should be 5000000000 without downcasting")
 		assert.Greater(t, evt.Data.Revision.RevID, int(1<<32), "RevID should be greater than 2^32")
 
+		// Validate editor field
+		assert.NotEmpty(t, evt.Data.Revision.Editor.UserText, "Editor.UserText should not be empty")
 		assert.NotNil(t, evt.Data.Revision.Editor.UserGroups, "Editor.UserGroups should not be nil")
+		assert.GreaterOrEqual(t, evt.Data.Revision.Editor.UserID, 0, "Editor.UserID should be non-negative")
+		assert.False(t, evt.Data.Revision.Editor.UserRegistrationDt.IsZero(), "Editor.UserRegistrationDt should be set")
+		assert.GreaterOrEqual(t, evt.Data.Revision.Editor.UserEditCount, 0, "Editor.UserEditCount should be non-negative")
 
 		eventReceived = true
 		return nil
