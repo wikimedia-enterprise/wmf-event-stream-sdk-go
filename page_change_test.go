@@ -102,6 +102,8 @@ func testPgChangeEvent(t *testing.T, evt *PageChange) {
 	assert.Equal(t, expected.Topic, (*evt).ID[0].Topic)
 	assert.Equal(t, expected.PageTitle, evt.Data.Page.PageTitle)
 	assert.Equal(t, expected.RevID, evt.Data.Revision.RevID)
+
+	assert.NotNil(t, evt.Data.Revision.Editor.UserGroups, "Editor.UserGroups should not be nil")
 }
 
 func TestPgPageChangeExec(t *testing.T) {
@@ -264,6 +266,8 @@ func TestPgPageChangeLargeRevisionID(t *testing.T) {
 		assert.Equal(t, expected.PageTitle, evt.Data.Page.PageTitle)
 		assert.Equal(t, expected.RevID, evt.Data.Revision.RevID, "RevID should be 5000000000 without downcasting")
 		assert.Greater(t, evt.Data.Revision.RevID, int(1<<32), "RevID should be greater than 2^32")
+
+		assert.NotNil(t, evt.Data.Revision.Editor.UserGroups, "Editor.UserGroups should not be nil")
 
 		eventReceived = true
 		return nil
