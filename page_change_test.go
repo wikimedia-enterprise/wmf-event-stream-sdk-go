@@ -327,7 +327,6 @@ func TestPgPageChangeLargeRevisionID(t *testing.T) {
 		assert.Equal(t, expected.RevID, evt.Data.Revision.RevID, "RevID should be 5000000000 without downcasting")
 		assert.Greater(t, evt.Data.Revision.RevID, int(1<<32), "RevID should be greater than 2^32")
 
-		// Validate editor field with specific values
 		assert.Equal(t, expected.Editor.UserText, evt.Data.Revision.Editor.UserText)
 		assert.Equal(t, expected.Editor.UserGroups, evt.Data.Revision.Editor.UserGroups)
 		assert.Equal(t, expected.Editor.UserIsBot, evt.Data.Revision.Editor.UserIsBot)
