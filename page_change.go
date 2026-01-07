@@ -45,6 +45,14 @@ type PageChange struct {
 			RevParentID      int64  `json:"rev_parent_id"`
 			RevSha1          string `json:"rev_sha1"`
 			RevSize          int    `json:"rev_size"`
+			Editor           struct {
+				UserText           string    `json:"user_text"`
+				UserGroups         []string  `json:"groups"`
+				UserIsBot          bool      `json:"is_bot"`
+				UserID             int       `json:"user_id"`
+				UserRegistrationDt time.Time `json:"registration_dt"`
+				UserEditCount      int       `json:"edit_count"`
+			} `json:"editor"`
 		} `json:"revision"`
 		PriorState struct {
 			Page struct {

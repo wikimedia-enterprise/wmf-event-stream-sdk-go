@@ -16,10 +16,22 @@ import (
 var errPgPageChangeTest = errors.New("page change test error")
 var pgPageChangeTestErrors = []error{io.EOF, io.EOF, context.Canceled}
 var pgPageChangeTestSince = time.Now().UTC()
+var pgPageChangeTestEditorRegistrationDt = func() time.Time {
+	t, _ := time.Parse(time.RFC3339, "2024-09-02T20:45:03Z")
+	return t
+}()
 var pgPageChangeTestResponse = map[int64]struct {
 	Topic     string
 	PageTitle string
 	RevID     int
+	Editor    struct {
+		UserText           string
+		UserGroups         []string
+		UserIsBot          bool
+		UserID             int
+		UserRegistrationDt time.Time
+		UserEditCount      int
+	}
 }{
 	72231974: {
 		Topic:     "eqiad.mediawiki.page-change",
@@ -31,16 +43,59 @@ var pgPageChangeTestResponse = map[int64]struct {
 		PageTitle: "beaggiefa",
 		RevID:     69852686,
 	},
+	77777155: {
+		Topic:     "eqiad.mediawiki.page-change",
+		PageTitle: "Varvara_Prohorova",
+		RevID:     1245305770,
+		Editor: struct {
+			UserText           string
+			UserGroups         []string
+			UserIsBot          bool
+			UserID             int
+			UserRegistrationDt time.Time
+			UserEditCount      int
+		}{
+			UserText:           "Svidrigayloff",
+			UserGroups:         []string{"*", "user", "autoconfirmed"},
+			UserIsBot:          false,
+			UserID:             48379723,
+			UserRegistrationDt: pgPageChangeTestEditorRegistrationDt,
+			UserEditCount:      10,
+		},
+	},
 }
 var pgPageChangeLargeRevIDTestResponse = map[int64]struct {
 	Topic     string
 	PageTitle string
 	RevID     int
+	Editor    struct {
+		UserText           string
+		UserGroups         []string
+		UserIsBot          bool
+		UserID             int
+		UserRegistrationDt time.Time
+		UserEditCount      int
+	}
 }{
 	77777155: {
 		Topic:     "eqiad.mediawiki.page-change",
 		PageTitle: "Varvara_Prohorova",
 		RevID:     5000000000,
+		Editor: struct {
+			UserText           string
+			UserGroups         []string
+			UserIsBot          bool
+			UserID             int
+			UserRegistrationDt time.Time
+			UserEditCount      int
+		}{
+			UserText:           "Svidrigayloff",
+			UserGroups:         []string{"*", "user", "autoconfirmed"},
+			UserIsBot:          false,
+			UserID:             48379723,
+			UserRegistrationDt: pgPageChangeTestEditorRegistrationDt,
+			UserEditCount:      10,
+		},
 	},
 }
 
@@ -102,6 +157,13 @@ func testPgChangeEvent(t *testing.T, evt *PageChange) {
 	assert.Equal(t, expected.Topic, (*evt).ID[0].Topic)
 	assert.Equal(t, expected.PageTitle, evt.Data.Page.PageTitle)
 	assert.Equal(t, expected.RevID, evt.Data.Revision.RevID)
+
+	assert.Equal(t, expected.Editor.UserText, evt.Data.Revision.Editor.UserText)
+	assert.Equal(t, expected.Editor.UserGroups, evt.Data.Revision.Editor.UserGroups)
+	assert.Equal(t, expected.Editor.UserIsBot, evt.Data.Revision.Editor.UserIsBot)
+	assert.Equal(t, expected.Editor.UserID, evt.Data.Revision.Editor.UserID)
+	assert.Equal(t, expected.Editor.UserRegistrationDt, evt.Data.Revision.Editor.UserRegistrationDt)
+	assert.Equal(t, expected.Editor.UserEditCount, evt.Data.Revision.Editor.UserEditCount)
 }
 
 func TestPgPageChangeExec(t *testing.T) {
@@ -264,6 +326,13 @@ func TestPgPageChangeLargeRevisionID(t *testing.T) {
 		assert.Equal(t, expected.PageTitle, evt.Data.Page.PageTitle)
 		assert.Equal(t, expected.RevID, evt.Data.Revision.RevID, "RevID should be 5000000000 without downcasting")
 		assert.Greater(t, evt.Data.Revision.RevID, int(1<<32), "RevID should be greater than 2^32")
+
+		assert.Equal(t, expected.Editor.UserText, evt.Data.Revision.Editor.UserText)
+		assert.Equal(t, expected.Editor.UserGroups, evt.Data.Revision.Editor.UserGroups)
+		assert.Equal(t, expected.Editor.UserIsBot, evt.Data.Revision.Editor.UserIsBot)
+		assert.Equal(t, expected.Editor.UserID, evt.Data.Revision.Editor.UserID)
+		assert.Equal(t, expected.Editor.UserRegistrationDt, evt.Data.Revision.Editor.UserRegistrationDt)
+		assert.Equal(t, expected.Editor.UserEditCount, evt.Data.Revision.Editor.UserEditCount)
 
 		eventReceived = true
 		return nil
