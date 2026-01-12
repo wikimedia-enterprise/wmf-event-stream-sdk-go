@@ -27,7 +27,7 @@ var pgPageChangeTestPriorStateRevDt = func() time.Time {
 var pgPageChangeTestResponse = map[int64]struct {
 	Topic     string
 	PageTitle string
-	RevID     int
+	RevID     int64
 	Editor    struct {
 		UserText           string
 		UserGroups         []string
@@ -73,7 +73,7 @@ var pgPageChangeTestResponse = map[int64]struct {
 var pgPageChangeLargeRevIDTestResponse = map[int64]struct {
 	Topic     string
 	PageTitle string
-	RevID     int
+	RevID     int64
 	Editor    struct {
 		UserText           string
 		UserGroups         []string
@@ -164,14 +164,12 @@ func testPgChangeEvent(t *testing.T, evt *PageChange) {
 	assert.Equal(t, expected.PageTitle, evt.Data.Page.PageTitle)
 	assert.Equal(t, expected.RevID, evt.Data.Revision.RevID)
 
-	if expected.Editor.UserText != "" {
-		assert.Equal(t, expected.Editor.UserText, evt.Data.Revision.Editor.UserText)
-		assert.Equal(t, expected.Editor.UserGroups, evt.Data.Revision.Editor.UserGroups)
-		assert.Equal(t, expected.Editor.UserIsBot, evt.Data.Revision.Editor.UserIsBot)
-		assert.Equal(t, expected.Editor.UserID, evt.Data.Revision.Editor.UserID)
-		assert.Equal(t, expected.Editor.UserRegistrationDt, evt.Data.Revision.Editor.UserRegistrationDt)
-		assert.Equal(t, expected.Editor.UserEditCount, evt.Data.Revision.Editor.UserEditCount)
-	}
+	assert.Equal(t, expected.Editor.UserText, evt.Data.Revision.Editor.UserText)
+	assert.Equal(t, expected.Editor.UserGroups, evt.Data.Revision.Editor.UserGroups)
+	assert.Equal(t, expected.Editor.UserIsBot, evt.Data.Revision.Editor.UserIsBot)
+	assert.Equal(t, expected.Editor.UserID, evt.Data.Revision.Editor.UserID)
+	assert.Equal(t, expected.Editor.UserRegistrationDt, evt.Data.Revision.Editor.UserRegistrationDt)
+	assert.Equal(t, expected.Editor.UserEditCount, evt.Data.Revision.Editor.UserEditCount)
 
 	assert.Equal(t, expected.PriorStateRevDt, evt.Data.PriorState.Revision.RevDt)
 }
@@ -335,7 +333,7 @@ func TestPgPageChangeLargeRevisionID(t *testing.T) {
 		assert.Equal(t, expected.Topic, (*evt).ID[0].Topic)
 		assert.Equal(t, expected.PageTitle, evt.Data.Page.PageTitle)
 		assert.Equal(t, expected.RevID, evt.Data.Revision.RevID, "RevID should be 5000000000 without downcasting")
-		assert.Greater(t, evt.Data.Revision.RevID, int(1<<32), "RevID should be greater than 2^32")
+		assert.Greater(t, evt.Data.Revision.RevID, int64(1<<32), "RevID should be greater than 2^32")
 
 		assert.Equal(t, expected.Editor.UserText, evt.Data.Revision.Editor.UserText)
 		assert.Equal(t, expected.Editor.UserGroups, evt.Data.Revision.Editor.UserGroups)
