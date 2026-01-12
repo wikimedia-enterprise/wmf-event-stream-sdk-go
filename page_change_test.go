@@ -20,6 +20,10 @@ var pgPageChangeTestEditorRegistrationDt = func() time.Time {
 	t, _ := time.Parse(time.RFC3339, "2024-09-02T20:45:03Z")
 	return t
 }()
+var pgPageChangeTestPriorStateRevDt = func() time.Time {
+	t, _ := time.Parse(time.RFC3339, "2024-09-04T18:34:08Z")
+	return t
+}()
 var pgPageChangeTestResponse = map[int64]struct {
 	Topic     string
 	PageTitle string
@@ -32,6 +36,7 @@ var pgPageChangeTestResponse = map[int64]struct {
 		UserRegistrationDt time.Time
 		UserEditCount      int
 	}
+	PriorStateRevDt time.Time
 }{
 	72231974: {
 		Topic:     "eqiad.mediawiki.page-change",
@@ -62,6 +67,7 @@ var pgPageChangeTestResponse = map[int64]struct {
 			UserRegistrationDt: pgPageChangeTestEditorRegistrationDt,
 			UserEditCount:      10,
 		},
+		PriorStateRevDt: pgPageChangeTestPriorStateRevDt,
 	},
 }
 var pgPageChangeLargeRevIDTestResponse = map[int64]struct {
@@ -158,12 +164,16 @@ func testPgChangeEvent(t *testing.T, evt *PageChange) {
 	assert.Equal(t, expected.PageTitle, evt.Data.Page.PageTitle)
 	assert.Equal(t, expected.RevID, evt.Data.Revision.RevID)
 
-	assert.Equal(t, expected.Editor.UserText, evt.Data.Revision.Editor.UserText)
-	assert.Equal(t, expected.Editor.UserGroups, evt.Data.Revision.Editor.UserGroups)
-	assert.Equal(t, expected.Editor.UserIsBot, evt.Data.Revision.Editor.UserIsBot)
-	assert.Equal(t, expected.Editor.UserID, evt.Data.Revision.Editor.UserID)
-	assert.Equal(t, expected.Editor.UserRegistrationDt, evt.Data.Revision.Editor.UserRegistrationDt)
-	assert.Equal(t, expected.Editor.UserEditCount, evt.Data.Revision.Editor.UserEditCount)
+	if expected.Editor.UserText != "" {
+		assert.Equal(t, expected.Editor.UserText, evt.Data.Revision.Editor.UserText)
+		assert.Equal(t, expected.Editor.UserGroups, evt.Data.Revision.Editor.UserGroups)
+		assert.Equal(t, expected.Editor.UserIsBot, evt.Data.Revision.Editor.UserIsBot)
+		assert.Equal(t, expected.Editor.UserID, evt.Data.Revision.Editor.UserID)
+		assert.Equal(t, expected.Editor.UserRegistrationDt, evt.Data.Revision.Editor.UserRegistrationDt)
+		assert.Equal(t, expected.Editor.UserEditCount, evt.Data.Revision.Editor.UserEditCount)
+	}
+
+	assert.Equal(t, expected.PriorStateRevDt, evt.Data.PriorState.Revision.RevDt)
 }
 
 func TestPgPageChangeExec(t *testing.T) {
