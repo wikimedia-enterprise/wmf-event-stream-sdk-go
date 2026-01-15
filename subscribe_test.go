@@ -57,11 +57,14 @@ func TestSubscribe(t *testing.T) {
 	srv := httptest.NewServer(createSubscribeServer(t))
 	defer srv.Close()
 
-	ctx := context.Background()
+	ctx := context.WithValue(context.Background(), MetricLabelStream, "test")
+
 	client := new(http.Client)
 	msgs := 0
 
-	err := subscribe(ctx, client, srv.URL+subscribeTestURL, subscribeTestSince, subscribeTestUserAgent, func(evt *Event) {
+	metrics := Metrics{enabled: false}
+
+	err := subscribe(ctx, client, srv.URL+subscribeTestURL, subscribeTestSince, subscribeTestUserAgent, metrics, func(evt *Event) {
 		assert.NotNil(t, evt)
 		assert.Equal(t, len(evt.ID), 2)
 		assert.Equal(t, evt.ID[0].Timestamp, subscribeTestTime)

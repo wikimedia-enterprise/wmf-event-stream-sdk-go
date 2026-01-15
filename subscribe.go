@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func subscribe(ctx context.Context, client *http.Client, url string, since time.Time, useragent string, handler func(evt *Event)) error {
+func subscribe(ctx context.Context, client *http.Client, url string, since time.Time, useragent string, metrics Metrics, handler func(evt *Event)) error {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url+"?since="+since.UTC().Format(time.RFC3339), nil)
 
 	if err != nil {
@@ -26,6 +26,7 @@ func subscribe(ctx context.Context, client *http.Client, url string, since time.
 	res, err := client.Do(req)
 
 	if err != nil {
+		metrics.IncTotalErrors(ctx.Value(MetricLabelStream).(string), SeverityLabelValueHigh, "yes", "no")
 		return err
 	}
 
@@ -38,6 +39,7 @@ func subscribe(ctx context.Context, client *http.Client, url string, since time.
 		line, err := reader.ReadBytes('\n')
 
 		if err != nil {
+			metrics.IncTotalErrors(ctx.Value(MetricLabelStream).(string), SeverityLabelValueHigh, "yes", "no")
 			return err
 		}
 
@@ -55,6 +57,7 @@ func subscribe(ctx context.Context, client *http.Client, url string, since time.
 		if len(evt.ID) > 0 && len(evt.Data) > 0 && err == nil {
 			bsd := new(baseData)
 			if err := json.Unmarshal(evt.Data, bsd); err != nil {
+				metrics.IncTotalErrors(ctx.Value(MetricLabelStream).(string), SeverityLabelValueHigh, "no", "yes")
 				return err
 			}
 

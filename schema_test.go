@@ -1,6 +1,7 @@
 package eventstream
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"testing"
@@ -51,13 +52,17 @@ func TestSchema(t *testing.T) {
 		[]byte(fmt.Sprintf(schemaTestData, schemaTestTitle)),
 	}
 
+	metrics := Metrics{enabled: false}
+
 	go func() {
 		for err := range storage.getErrors() {
 			assert.Error(t, err)
 		}
 	}()
 
-	parseSchema(schema, &event, storage)
+	ctx := context.WithValue(context.Background(), MetricLabelStream, "test")
+
+	parseSchema(ctx, schema, &event, storage, metrics)
 
 	assert.NotEqual(t, schemaTestSince, storage.getSince())
 	assert.Equal(t, schemaTestTimestamp, storage.getSince())

@@ -35,6 +35,7 @@ func NewClient() *Client {
 			pageChangeURL,
 		},
 		"",
+		Metrics{enabled: false},
 	}
 }
 
@@ -50,18 +51,24 @@ type Client struct {
 	backoffTime time.Duration
 	options     *Options
 	userAgent   string
+	metrics     Metrics
 }
 
 // PageCreate connect to page create stream
-func (cl *Client) PageCreate(ctx context.Context, since time.Time, handler func(evt *PageCreate) error) *Stream {
+func (cl *Client) PageCreate(tx context.Context, since time.Time, handler func(evt *PageCreate) error) *Stream {
 	store := newStorage(since, cl.backoffTime)
+	ctx := context.WithValue(tx, MetricLabelStream, pageCreateURL)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageCreateURL, store.getSince(), cl.userAgent, func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageCreateURL, store.getSince(), cl.userAgent, cl.metrics, func(msg *Event) {
+			cl.metrics.IncAverageEvents(cl.options.PageCreateURL)
+			cl.metrics.IncTotalEvents(cl.options.PageCreateURL)
+
 			evt := new(PageCreate)
-			parseSchema(evt, msg, store)
+			parseSchema(ctx, evt, msg, store, cl.metrics)
 
 			if err := handler(evt); err != nil {
+				cl.metrics.IncTotalErrors(ctx.Value(MetricLabelStream).(string), SeverityLabelValueMedium, "no", "no")
 				store.setError(err)
 			}
 		})
@@ -69,15 +76,20 @@ func (cl *Client) PageCreate(ctx context.Context, since time.Time, handler func(
 }
 
 // PageDelete connect to page delete stream
-func (cl *Client) PageDelete(ctx context.Context, since time.Time, handler func(evt *PageDelete) error) *Stream {
+func (cl *Client) PageDelete(tx context.Context, since time.Time, handler func(evt *PageDelete) error) *Stream {
 	store := newStorage(since, cl.backoffTime)
+	ctx := context.WithValue(tx, MetricLabelStream, pageDeleteURL)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageDeleteURL, store.getSince(), cl.userAgent, func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageDeleteURL, store.getSince(), cl.userAgent, cl.metrics, func(msg *Event) {
+			cl.metrics.IncAverageEvents(ctx.Value(MetricLabelStream).(string))
+			cl.metrics.IncTotalEvents(ctx.Value(MetricLabelStream).(string))
+
 			evt := new(PageDelete)
-			parseSchema(evt, msg, store)
+			parseSchema(ctx, evt, msg, store, cl.metrics)
 
 			if err := handler(evt); err != nil {
+				cl.metrics.IncTotalErrors(ctx.Value(MetricLabelStream).(string), SeverityLabelValueMedium, "no", "no")
 				store.setError(err)
 			}
 		})
@@ -85,15 +97,20 @@ func (cl *Client) PageDelete(ctx context.Context, since time.Time, handler func(
 }
 
 // PageMove connect to page move stream
-func (cl *Client) PageMove(ctx context.Context, since time.Time, handler func(evt *PageMove) error) *Stream {
+func (cl *Client) PageMove(tx context.Context, since time.Time, handler func(evt *PageMove) error) *Stream {
 	store := newStorage(since, cl.backoffTime)
+	ctx := context.WithValue(tx, MetricLabelStream, pageMoveURL)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageMoveURL, store.getSince(), cl.userAgent, func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageMoveURL, store.getSince(), cl.userAgent, cl.metrics, func(msg *Event) {
+			cl.metrics.IncAverageEvents(ctx.Value(MetricLabelStream).(string))
+			cl.metrics.IncTotalEvents(ctx.Value(MetricLabelStream).(string))
+
 			evt := new(PageMove)
-			parseSchema(evt, msg, store)
+			parseSchema(ctx, evt, msg, store, cl.metrics)
 
 			if err := handler(evt); err != nil {
+				cl.metrics.IncTotalErrors(ctx.Value(MetricLabelStream).(string), SeverityLabelValueMedium, "no", "no")
 				store.setError(err)
 			}
 		})
@@ -101,15 +118,20 @@ func (cl *Client) PageMove(ctx context.Context, since time.Time, handler func(ev
 }
 
 // RevisionCreate connect to revision create stream
-func (cl *Client) RevisionCreate(ctx context.Context, since time.Time, handler func(evt *RevisionCreate) error) *Stream {
+func (cl *Client) RevisionCreate(tx context.Context, since time.Time, handler func(evt *RevisionCreate) error) *Stream {
 	store := newStorage(since, cl.backoffTime)
+	ctx := context.WithValue(tx, MetricLabelStream, revisionCreateURL)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionCreateURL, store.getSince(), cl.userAgent, func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionCreateURL, store.getSince(), cl.userAgent, cl.metrics, func(msg *Event) {
+			cl.metrics.IncAverageEvents(ctx.Value(MetricLabelStream).(string))
+			cl.metrics.IncTotalEvents(ctx.Value(MetricLabelStream).(string))
+
 			evt := new(RevisionCreate)
-			parseSchema(evt, msg, store)
+			parseSchema(ctx, evt, msg, store, cl.metrics)
 
 			if err := handler(evt); err != nil {
+				cl.metrics.IncTotalErrors(ctx.Value(MetricLabelStream).(string), SeverityLabelValueMedium, "no", "no")
 				store.setError(err)
 			}
 		})
@@ -117,15 +139,20 @@ func (cl *Client) RevisionCreate(ctx context.Context, since time.Time, handler f
 }
 
 // RevisionVisibilityChange connect to revision visibility change stream
-func (cl *Client) RevisionVisibilityChange(ctx context.Context, since time.Time, handler func(evt *RevisionVisibilityChange) error) *Stream {
+func (cl *Client) RevisionVisibilityChange(tx context.Context, since time.Time, handler func(evt *RevisionVisibilityChange) error) *Stream {
 	store := newStorage(since, cl.backoffTime)
+	ctx := context.WithValue(tx, MetricLabelStream, revisionVisibilityChangeURL)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionVisibilityChangeURL, store.getSince(), cl.userAgent, func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.RevisionVisibilityChangeURL, store.getSince(), cl.userAgent, cl.metrics, func(msg *Event) {
+			cl.metrics.IncAverageEvents(ctx.Value(MetricLabelStream).(string))
+			cl.metrics.IncTotalEvents(ctx.Value(MetricLabelStream).(string))
+
 			evt := new(RevisionVisibilityChange)
-			parseSchema(evt, msg, store)
+			parseSchema(ctx, evt, msg, store, cl.metrics)
 
 			if err := handler(evt); err != nil {
+				cl.metrics.IncTotalErrors(ctx.Value(MetricLabelStream).(string), SeverityLabelValueMedium, "no", "no")
 				store.setError(err)
 			}
 		})
@@ -133,15 +160,20 @@ func (cl *Client) RevisionVisibilityChange(ctx context.Context, since time.Time,
 }
 
 // PageChange connect to page change stream
-func (cl *Client) PageChange(ctx context.Context, since time.Time, handler func(evt *PageChange) error) *Stream {
+func (cl *Client) PageChange(tx context.Context, since time.Time, handler func(evt *PageChange) error) *Stream {
 	store := newStorage(since, cl.backoffTime)
+	ctx := context.WithValue(tx, MetricLabelStream, pageChangeURL)
 
 	return NewStream(store, func(since time.Time) error {
-		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageChangeURL, store.getSince(), cl.userAgent, func(msg *Event) {
+		return subscribe(ctx, cl.httpClient, cl.url+cl.options.PageChangeURL, store.getSince(), cl.userAgent, cl.metrics, func(msg *Event) {
+			cl.metrics.IncAverageEvents(ctx.Value(MetricLabelStream).(string))
+			cl.metrics.IncTotalEvents(ctx.Value(MetricLabelStream).(string))
+
 			evt := new(PageChange)
-			parseSchema(evt, msg, store)
+			parseSchema(ctx, evt, msg, store, cl.metrics)
 
 			if err := handler(evt); err != nil {
+				cl.metrics.IncTotalErrors(ctx.Value(MetricLabelStream).(string), SeverityLabelValueMedium, "no", "no")
 				store.setError(err)
 			}
 		})
